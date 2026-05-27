@@ -1,0 +1,15 @@
+<ul class="topic-list">
+    @for (topic of topics(); track topic.id) {
+    <li class="topic-item">
+        <label>
+            <input type="checkbox" [checked]="topic.done"
+                (change)="toggleTopic(topic.id)" />
+
+            <span>
+                <strong>{{ topic.title }}</strong>
+                <small>{{ topic.description }}</small>
+            </span>
+        </label>
+    </li>
+    }
+</ul>
