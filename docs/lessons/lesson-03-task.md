@@ -32,10 +32,10 @@ Add routing to the learning tracker:
 
 ## Step 1: Extract the starter topics
 
-- [ ] Create `src/app/topics.ts`.
-- [ ] Move the starter topic array out of `App` and into this file.
-- [ ] Export it as `INITIAL_TOPICS`.
-- [ ] Keep the existing `Topic` type in `src/app/topic.ts`.
+- [X] Create `src/app/topics.ts`.
+- [X] Move the starter topic array out of `App` and into this file.
+- [X] Export it as `INITIAL_TOPICS`.
+- [X] Keep the existing `Topic` type in `src/app/topic.ts`.
 
 Suggested shape:
 
@@ -308,10 +308,10 @@ Keep the checkbox behavior unchanged:
 
 Before running the app, answer these:
 
-- [ ] If the URL is `/`, which component should render inside `<router-outlet />`?
-- [ ] If the URL is `/topics/2`, which component should render?
-- [ ] What value should `TopicDetailsPage.id()` return for `/topics/2`?
-- [ ] Why should the dashboard checkbox state reset if you navigate away and come back?
+- [X] If the URL is `/`, which component should render inside `<router-outlet />`?
+- [X] If the URL is `/topics/2`, which component should render?
+- [X] What value should `TopicDetailsPage.id()` return for `/topics/2`?
+- [X] Why should the dashboard checkbox state reset if you navigate away and come back?
 
 ## Verification checklist
 
@@ -327,16 +327,16 @@ Before running the app, answer these:
 
 ## Reflection questions
 
-- [ ] What is the job of `App` after this refactor?
-- [ ] What is the job of `DashboardPage`?
-- [ ] Why did we use `RouterOutlet`?
-- [ ] Why did we use `RouterLink` instead of `href`?
-- [ ] How is `loadComponent` different from importing a component directly into `App`?
-- [ ] How does `withComponentInputBinding()` make route params feel similar to normal component inputs?
-- [ ] How does this compare with React Router's `<Routes>` and Vue Router's `<RouterView />`?
+- [X] What is the job of `App` after this refactor?
+- [X] What is the job of `DashboardPage`?
+- [X] Why did we use `RouterOutlet`?
+- [X] Why did we use `RouterLink` instead of `href`?
+- [X] How is `loadComponent` different from importing a component directly into `App`?
+- [X] How does `withComponentInputBinding()` make route params feel similar to normal component inputs?
+- [X] How does this compare with React Router's `<Routes>` and Vue Router's `<RouterView />`?
 
 ## Stretch task
 
 - [ ] Add a visible active state to the dashboard navigation link with `routerLinkActive`.
-- [ ] Add one short "What you will learn next" line to each topic detail page.
+- [X] Add one short "What you will learn next" line to each topic detail page.
 - [ ] Add route titles that mention the selected topic name. This may require a different approach than static `title` strings, so treat it as research rather than required work.

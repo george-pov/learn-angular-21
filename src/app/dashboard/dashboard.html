@@ -1,0 +1,33 @@
+<main class="learning-shell">
+
+  <section class="intro">
+    <p class="eyebrow">Lesson 1</p>
+    <h1>Angular 21 Learning Tracker</h1>
+    <p>
+      This tiny app uses signals for state, computed values for derived state, and modern template
+      control flow for rendering.
+    </p>
+  </section>
+
+  <section class="progress-panel" aria-labelledby="progress-heading">
+    <h2 id="progress-heading">Progress</h2>
+
+    <p class="progress-count">{{ completedCount() }} of {{ topics().length }} topics complete</p>
+    <p>{{ completedPercent() }}% complete</p>
+
+    <button type="button" (click)="resetProgress()">Reset progress</button>
+
+    @if (allTopicsComplete()) {
+      <p class="complete-message">All topics complete. Time to build something slightly harder.</p>
+    } @else {
+      <p class="next-message">Toggle a topic to see Angular update the computed progress.</p>
+    }
+  </section>
+
+  <section class="topic-panel" aria-labelledby="topics-heading">
+    <h2 id="topics-heading">Topics</h2>
+
+    <app-topics-list [topics]="topics()" (toggle)="toggleTopic($event)"></app-topics-list>
+  </section>
+  
+</main>
