@@ -4,6 +4,10 @@
 
 Move completed count, total count, progress label, and completion status into `TopicStore`.
 
+## Starting point
+
+`TopicStore` owns the writable `topicsSignal`, and `Dashboard` reads `store.topics()`. Any topic-derived computed values still live in `Dashboard`.
+
 ## Files to edit
 
 - `src/app/topic-store.ts`
@@ -49,6 +53,10 @@ Move completed count, total count, progress label, and completion status into `T
 
 5. Leave the form group in `Dashboard`.
 
+6. Leave `TopicStore.addTopic()` and `TopicStore.toggleTopic()` unchanged. This lesson only moves derived state.
+
+7. If `Dashboard` no longer uses `computed`, remove it from the Angular import.
+
 ## Prediction
 
 Before running the app, predict what changes in the UI. Which class now knows how progress is calculated?
@@ -60,6 +68,8 @@ Before running the app, predict what changes in the UI. Which class now knows ho
 - Adding a topic updates the total count.
 - `Dashboard` no longer imports `computed`.
 - `TopicStore` owns both source state and derived state.
+- `Dashboard` no longer filters `topics` to calculate completed count.
+- `TopicStore` does not use `effect()` yet.
 
 ## Reflection
 

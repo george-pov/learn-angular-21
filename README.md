@@ -25,6 +25,7 @@ Useful topics to highlight include:
 - Router configuration and lazy loading in newer Angular apps.
 - Forms, HTTP, and RxJS usage from the point of view of someone who already knows Angular v15.
 - Testing with the current project setup.
+- End-to-end testing with Playwright from the point of view of user-visible browser workflows.
 - Build, CLI, and TypeScript changes that matter in day-to-day development.
 
 ## Teaching style for AI agents

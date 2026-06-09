@@ -4,6 +4,10 @@
 
 Add a `STORAGE_KEY` injection token, provide it at the root, inject it in `TopicStore`, and render it as a small diagnostic.
 
+## Starting point
+
+`TopicStore` owns topic state. `app.config.ts` already contains router providers and the root logger provider from Lesson 05-06.
+
 ## Files to create
 
 - `src/app/app-tokens.ts`
@@ -54,7 +58,7 @@ Add a `STORAGE_KEY` injection token, provide it at the root, inject it in `Topic
    readonly storageKey = inject(STORAGE_KEY);
    ```
 
-   This can be readonly and public for this lesson because the dashboard renders it as a diagnostic.
+   This can be readonly and public for this lesson because the dashboard renders it as a diagnostic. Later, once persistence is working, it can be made private again.
 
 5. In `dashboard.html`, render the key near the bottom of the dashboard:
 
@@ -63,6 +67,12 @@ Add a `STORAGE_KEY` injection token, provide it at the root, inject it in `Topic
    ```
 
 6. Do not add `localStorage` persistence yet.
+
+7. Do not replace the string token with a raw string in `inject()`. Always inject the `STORAGE_KEY` token:
+
+   ```ts
+   inject(STORAGE_KEY)
+   ```
 
 ## Prediction
 
@@ -75,6 +85,8 @@ Before running the app, predict what string the dashboard will render for the st
 - `STORAGE_KEY` is an `InjectionToken<string>`.
 - `app.config.ts` provides the value with `useValue`.
 - No persistence code has been added yet.
+- Changing the `useValue` string changes the diagnostic text after refresh.
+- `TopicStore` does not hardcode `'learn-angular-21-topics'`.
 
 ## Reflection
 

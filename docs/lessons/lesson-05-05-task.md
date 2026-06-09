@@ -4,6 +4,10 @@
 
 Add `LoggerService`, inject it in `Dashboard` and `TopicDetails`, then provide a local logger instance on `TopicDetails`.
 
+## Starting point
+
+`TopicStore` owns topic state and derived progress state. `Dashboard` injects `TopicStore`. `TopicDetails` already receives the route `id` through a signal input.
+
 ## Files to create
 
 - `src/app/logger.ts`
@@ -48,6 +52,8 @@ Add `LoggerService`, inject it in `Dashboard` and `TopicDetails`, then provide a
    }
    ```
 
+   If `dashboard.ts` already imports `inject` for `TopicStore`, add only the `LoggerService` import and the new field.
+
 3. In `topic-details.ts`, inject the logger and add a local provider:
 
    ```ts
@@ -80,6 +86,8 @@ Add `LoggerService`, inject it in `Dashboard` and `TopicDetails`, then provide a
 
 5. Do not change `TopicStore`.
 
+6. Do not add `LoggerService` to `app.config.ts`. Its root provider comes from `providedIn: 'root'`.
+
 ## Prediction
 
 Before running the app, predict whether the dashboard and details page use the same logger instance. Which component creates the local provider?
@@ -91,6 +99,8 @@ Before running the app, predict whether the dashboard and details page use the s
 - The details page renders a logger label.
 - The console shows a dashboard log and a topic-details log.
 - The details page logger has its own instance because `TopicDetails` has `providers: [LoggerService]`.
+- The dashboard does not need a local `providers` array for the logger.
+- Removing `providers: [LoggerService]` from `TopicDetails` would make it use the root logger.
 
 ## Reflection
 

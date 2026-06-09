@@ -4,6 +4,10 @@
 
 Move `topics`, `toggleTopic`, and topic appending from `Dashboard` into `TopicStore`.
 
+## Starting point
+
+`Dashboard` injects `TopicStore` and renders `store.getGreeting()`. Topic state, progress computations, and the reactive form still live in `Dashboard`.
+
 ## Files to edit
 
 - `src/app/topic-store.ts`
@@ -81,12 +85,21 @@ Move `topics`, `toggleTopic`, and topic appending from `Dashboard` into `TopicSt
 
 4. In `dashboard.ts`, remove the local `topics` signal and `toggleTopic` method.
 
-5. Update `Dashboard.addTopic()` so it delegates to the store:
+5. Keep the form in `Dashboard`, but update `Dashboard.addTopic()` so it delegates the final state change to the store:
 
    ```ts
    const value = this.topicForm.getRawValue();
    this.store.addTopic(value.title, value.description);
    this.topicForm.reset({ title: '', description: '' });
+   ```
+
+   Keep the existing invalid-submit guard from Module 04:
+
+   ```ts
+   if (this.topicForm.invalid) {
+     this.topicForm.markAllAsTouched();
+     return;
+   }
    ```
 
 6. Keep any dashboard `computed` values for now, but make them read from `this.store.topics()` instead of `this.topics()`. They move into the store in Lesson 05-04.
@@ -100,6 +113,8 @@ Move `topics`, `toggleTopic`, and topic appending from `Dashboard` into `TopicSt
    />
    ```
 
+8. Remove any template binding that still references `topics()` directly from `Dashboard`.
+
 ## Prediction
 
 Before running the app, predict whether the visible UI changes. Which class now owns the topic array?
@@ -111,6 +126,8 @@ Before running the app, predict whether the visible UI changes. Which class now 
 - Submitting the form still adds a new topic.
 - `Dashboard` no longer declares a `topics` signal.
 - `TopicStore` exposes `readonly topics = this.topicsSignal.asReadonly()`.
+- Only `TopicStore` calls `topicsSignal.set()` or `topicsSignal.update()`.
+- Any remaining dashboard computed values read from `store.topics()`.
 
 ## Reflection
 

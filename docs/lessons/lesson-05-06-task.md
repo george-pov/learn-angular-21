@@ -4,6 +4,10 @@
 
 Use a `Logger` token with `ConsoleLogger` at the root and `VerboseLogger` on the details page.
 
+## Starting point
+
+`LoggerService` exists and `TopicDetails` provides a local `LoggerService` instance. This lesson replaces that concrete-service shape with a token and two implementations.
+
 ## Files to edit
 
 - `src/app/logger.ts`
@@ -39,6 +43,8 @@ Use a `Logger` token with `ConsoleLogger` at the root and `VerboseLogger` on the
    }
    ```
 
+   The abstract class is the DI token. The two concrete classes are implementations.
+
 2. In `app.config.ts`, provide the root implementation:
 
    ```ts
@@ -63,6 +69,8 @@ Use a `Logger` token with `ConsoleLogger` at the root and `VerboseLogger` on the
    private readonly logger = inject(Logger);
    ```
 
+   Remove the `LoggerService` import.
+
 4. In `topic-details.ts`, override the token locally:
 
    ```ts
@@ -77,11 +85,15 @@ Use a `Logger` token with `ConsoleLogger` at the root and `VerboseLogger` on the
    }
    ```
 
+   Replace `providers: [LoggerService]` with the provider record above.
+
 5. In `topic-details.html`, keep rendering the label:
 
    ```html
    <p>{{ logger.label }}</p>
    ```
+
+6. Do not inject `ConsoleLogger` or `VerboseLogger` directly in components.
 
 ## Prediction
 
@@ -94,6 +106,8 @@ Before running the app, predict which logger label appears on the details page. 
 - Navigating to `/topics/1` logs with the details implementation.
 - No component injects `ConsoleLogger` or `VerboseLogger` directly.
 - Consumers inject only `Logger`.
+- `app.config.ts` owns the root logger choice.
+- `TopicDetails.providers` owns the details-page override.
 
 ## Reflection
 

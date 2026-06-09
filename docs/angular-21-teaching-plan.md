@@ -28,7 +28,7 @@ The example app is a small learning-tracker dashboard for Angular 21 concepts. I
 - A small form to add custom topics.
 - A shared store service and persisted state.
 - A real HTTP-backed topic list (via a small local API).
-- Deferrable views and tests for the final shape.
+- Deferrable views, unit tests, and end-to-end tests for the final shape.
 
 The earliest micro-lessons stay inside this domain but work on **primitive signals first** (a "topics completed" counter, a "current topic title" text input). The topic *array*, list rendering, and child components arrive in Module 02. This keeps Lesson 01-01 free of arrays, `@for`, and component composition.
 
@@ -56,7 +56,8 @@ No feature folders, no `Topic` type, no seed topics, no child components. Module
 | 05 | Dependency Injection | `inject()`, root services, signals in services, scoped providers, alternative providers. |
 | 06 | HTTP | `provideHttpClient`, GET, error handling, POST, signal/observable interop, against a local `json-server` API. |
 | 07 | Deferrable Views | `@defer`, triggers, loading and placeholder and error blocks. |
-| 08 | Testing | TestBed, fixtures, querying the DOM, event simulation, signal-driven assertions. |
+| 08 | Component and Store Testing | TestBed, fixtures, querying the DOM, event simulation, signal-driven assertions. |
+| 09 | End-to-End Testing | Playwright Test, `webServer`, locators, web-first assertions, user workflows, API boundary control. |
 
 A short [docs/build-and-production.md](./build-and-production.md) reference page (to be added with Module 08) covers `npm run build`, what changes in production, and how lazy loading and deferrable views affect bundles. It is reference reading, not a lesson module.
 
@@ -208,23 +209,46 @@ End-of-module visible state: the topic details page contains a deferred panel wi
 
 ---
 
-## Module 08: Testing
+## Module 08: Component and Store Testing
 
-Topic: write small, behavior-focused tests with the project's existing Karma/Jasmine setup.
+Topic: write small, behavior-focused tests with the project's existing Angular unit-test setup.
 
 Prior modules required: Modules 01–07.
 
-After this module the learner can configure a `TestBed`, render a component into a fixture, query the DOM, simulate events, and assert against signal-driven output.
+After this module the learner can configure a `TestBed`, render a component into a fixture, query the DOM, simulate events, and assert against signal-driven output. These tests run without a real browser and without starting the local API.
 
 Micro-lessons:
 
-- **08-01 Run the default test suite.** Concept: `npm test`, what Karma does, how to read a passing run. Change: none in app code. The lesson asks the learner to run `npm test` and read the default `app.spec.ts` produced by `ng new`.
+- **08-01 Run the default test suite.** Concept: `npm test`, what the Angular unit-test runner does, how to read a passing run. Change: none in app code. The lesson asks the learner to run `npm test` and read the current spec files.
 - **08-02 Render a component in a test.** Concept: `TestBed.configureTestingModule`, `createComponent`, `detectChanges`. Change: write a fresh `dashboard.spec.ts` that creates a `Dashboard` component and asserts that the page renders the app title.
 - **08-03 Query and assert text content.** Concept: `fixture.nativeElement.querySelector`, asserting `textContent`. Change: extend the spec to assert that the progress label renders `"0 of N topics complete"` (or similar) on first render.
 - **08-04 Simulate a click and assert.** Concept: dispatching a DOM event and re-running change detection. Change: write a test that clicks the form's submit button after typing a valid title, then asserts the new topic appears in the list. May require providing a fake `TopicStore` or a stub `HttpClient`.
 - **08-05 Test a signal-driven computed.** Concept: testing the store directly without a component, asserting on `store.completedCount()`. Change: write `topic-store.spec.ts` that injects `TopicStore` with `TestBed.inject`, mutates state via the store's API, and asserts on computed values.
 
 End-of-module visible state: `npm test` passes with several behaviorally-focused tests covering the dashboard and the store.
+
+---
+
+## Module 09: End-to-End Testing
+
+Topic: test the working app through a real browser with Playwright.
+
+Prior modules required: Modules 01-08.
+
+After this module the learner can explain the E2E testing boundary, install Playwright Test, configure the Angular dev server through Playwright's `webServer`, write browser-driven tests with user-facing locators, test a form workflow, test route navigation and deferred UI, and control the API boundary for deterministic E2E tests.
+
+This module uses Playwright as the example E2E tool. It does not replace Module 08 unit and component tests. Module 08 tests isolate Angular pieces. Module 09 tests whether the built app behaves correctly from the browser user's point of view.
+
+Micro-lessons:
+
+- **09-01 Add Playwright Test.** Concept: an E2E runner lives outside Angular TestBed and controls a browser. Change: run `npm init playwright@latest`, choose TypeScript and an `e2e` test folder, install browsers, and add `e2e` scripts.
+- **09-02 Launch the app for E2E tests.** Concept: `webServer` starts the Angular dev server and `baseURL` lets tests navigate with relative paths. Change: configure `playwright.config.ts`, create a dashboard smoke test, and run `npm run e2e`.
+- **09-03 Use locators and web-first assertions.** Concept: user-facing locators plus assertions that wait for visible state. Change: assert the progress label, a topic link, and a checkbox state from the real page.
+- **09-04 Test a form workflow.** Concept: an E2E test drives browser interactions instead of calling component methods. Change: fill the topic form, submit it, and assert the new topic appears.
+- **09-05 Test routing and deferred UI.** Concept: browser navigation, URL assertions, and waiting for deferred content after interaction. Change: navigate from the dashboard to a topic details route and open the deferred notes panel.
+- **09-06 Control the API boundary.** Concept: deterministic E2E tests need a deliberate data boundary. Change: use Playwright request routing to fulfill the topics API with test data before the app loads.
+
+End-of-module visible state: `npm run e2e` passes with Playwright tests for dashboard load, user-visible state, form submission, route navigation, deferred notes, and controlled API data.
 
 ---
 

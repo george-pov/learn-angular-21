@@ -4,6 +4,10 @@
 
 Inject `TopicStore` in `Dashboard` and render the greeting from the service.
 
+## Starting point
+
+`TopicStore` should exist with `@Injectable({ providedIn: 'root' })` and `getGreeting()`. The dashboard should still own the topic state and form from Module 04.
+
 ## Files to edit
 
 - `src/app/dashboard/dashboard.ts`
@@ -29,6 +33,8 @@ Inject `TopicStore` in `Dashboard` and render the greeting from the service.
    protected readonly store = inject(TopicStore);
    ```
 
+   Use `protected` because the template will read this field.
+
 4. In `dashboard.html`, render the greeting near the top of the dashboard:
 
    ```html
@@ -48,6 +54,8 @@ Before running the app, predict where the greeting will appear. Will the topic l
 - Toggling topics still works.
 - Submitting the form still adds a topic.
 - `TopicStore` still contains only `getGreeting()`.
+- `Dashboard` does not call `new TopicStore()`.
+- `Dashboard` still owns `topics`, `toggleTopic`, and the form submit handler.
 
 ## Reflection
 

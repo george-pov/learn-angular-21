@@ -2,7 +2,7 @@
 
 ## Topic area
 
-Create, scope, and replace services and injected values.
+Create, scope, and replace services and injected values. This module uses dependency injection to move topic state out of the dashboard and then shows how Angular decides which service or value a component receives.
 
 ## Prior modules
 
@@ -15,6 +15,26 @@ Angular v15 commonly showed constructor injection first. Angular 21 code can use
 React has no built-in equivalent to Angular's injector tree. Context is the closest comparison for sharing values through a subtree, but Angular providers can create class instances, replace implementations, and provide configuration values. Vue `provide` / `inject` is also a useful comparison for scoping, but Angular providers are strongly tied to injectors.
 
 This module keeps topic data local. HTTP and a real API arrive in Module 06.
+
+## Module mental model
+
+Dependency injection answers one question:
+
+```text
+When this class asks for a token, what value should Angular give it?
+```
+
+The answer depends on three pieces:
+
+- The **token** being requested, such as `TopicStore`, `Logger`, or `STORAGE_KEY`.
+- The **provider record** that tells Angular how to create or return the value.
+- The **injector boundary** where that provider record is registered.
+
+This module introduces those pieces in layers. First the learner creates a root service and injects it. Then topic state moves into that service. Only after that does the module show component-level providers, class replacement, plain values, factory values, and signal side effects.
+
+## Scope boundary
+
+This module is not an HTTP, persistence architecture, or production state-management module. It uses a store service because that is the smallest useful example of DI in this app. Module 06 replaces local-only data changes with HTTP calls.
 
 ## Micro-lessons
 

@@ -4,6 +4,10 @@
 
 Add an `APP_BUILD_LABEL` token, provide it with `useFactory`, inject it in `App`, and render it in the footer.
 
+## Starting point
+
+`app-tokens.ts` already exports `STORAGE_KEY`. `app.config.ts` already provides `STORAGE_KEY` with `useValue`. The app shell renders the routed page through `<router-outlet />`.
+
 ## Files to edit
 
 - `src/app/app-tokens.ts`
@@ -30,6 +34,8 @@ Add an `APP_BUILD_LABEL` token, provide it with `useFactory`, inject it in `App`
    }
    ```
 
+   Keep the existing router, logger, and storage providers.
+
 3. In `app.ts`, import `inject` and the token:
 
    ```ts
@@ -49,6 +55,10 @@ Add an `APP_BUILD_LABEL` token, provide it with `useFactory`, inject it in `App`
    <footer>{{ buildLabel }}</footer>
    ```
 
+6. Do not put `new Date()` directly in the template. The point of the lesson is that the provider factory creates the value.
+
+7. Do not change the logger provider in this task. `useFactory` can create services too, but this micro-lesson uses the simpler value case.
+
 ## Prediction
 
 Before running the app, predict whether the footer value changes while the app is open. What happens after a full browser refresh?
@@ -60,6 +70,8 @@ Before running the app, predict whether the footer value changes while the app i
 - Refreshing the browser creates a new timestamp.
 - Navigating between dashboard and details does not recompute the label.
 - `APP_BUILD_LABEL` uses `useFactory`, not `useValue`.
+- `App` injects the token rather than importing a constant string.
+- The factory has no `deps` array because it does not depend on other tokens.
 
 ## Reflection
 

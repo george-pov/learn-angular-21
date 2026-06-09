@@ -4,6 +4,10 @@
 
 Create `TopicStore` with a greeting method. Do not move dashboard state yet.
 
+## Starting point
+
+Before this lesson, `Dashboard` should still own the topic signal, topic form, progress computations, and topic mutation methods from Module 04.
+
 ## Files to create
 
 - `src/app/topic-store.ts`
@@ -27,6 +31,14 @@ Create `TopicStore` with a greeting method. Do not move dashboard state yet.
 
 3. Do not move the `topics` signal, `topicForm`, or any dashboard methods.
 
+4. Do not add a provider record in `app.config.ts`. `providedIn: 'root'` is the provider registration for this lesson.
+
+5. Read the file back and name the three parts:
+
+   - The token: `TopicStore`
+   - The root provider registration: `@Injectable({ providedIn: 'root' })`
+   - The test method: `getGreeting()`
+
 ## Prediction
 
 Before running the app, predict whether the UI changes. Should a service that nobody injects yet affect the page?
@@ -38,6 +50,7 @@ Before running the app, predict whether the UI changes. Should a service that no
 - `src/app/topic-store.ts` exports `TopicStore`.
 - `TopicStore` is decorated with `@Injectable({ providedIn: 'root' })`.
 - No dashboard state moved in this lesson.
+- `app.config.ts` does not mention `TopicStore`.
 
 ## Reflection
 
