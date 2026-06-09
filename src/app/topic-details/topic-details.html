@@ -1,13 +1,14 @@
-<main class="details-page">
-  <a routerLink="/">Back to dashboard</a>
+<section class="details">
+  <h1>Topic {{ id() }}</h1>
+  <p>This routed page receives the route parameter through a signal input.</p>
 
-  @if (topic(); as topic) {
-    <h1>{{ topic.title }}</h1>
-    <p>{{ topic.description }}</p>
-    <p>Topic id: {{ topic.id }}</p>
-    <p>What you will learn next: {{ nextTopic()?.title }}</p>
-  } @else {
-    <h1>Topic not found</h1>
-    <p>No topic exists for id {{ id() }}.</p>
+  @defer (on interaction(openNotes)) {
+    <app-topic-notes [topicId]="id()" />
+  } @placeholder {
+    <button #openNotes type="button">Open notes</button>
+  } @loading {
+    <p>Loading notes...</p>
+  } @error {
+    <p>Could not load notes.</p>
   }
-</main>
+</section>

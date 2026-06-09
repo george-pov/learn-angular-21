@@ -39,33 +39,66 @@ When acting as a tutor:
 - Point out what is idiomatic Angular today and what is still supported mainly for compatibility.
 - When version-specific details matter, verify them against the installed dependencies or official Angular documentation.
 
+## Learning principles
+
+Every lesson in this project must satisfy these six principles. They are the durable teaching contract for this repository.
+
+- **Scaffolded learning.** Each new idea rests on concepts the learner already understands from earlier micro-lessons or from prior React, Vue, or Angular v15 experience.
+- **Progressive disclosure.** Introduce only the next necessary piece of Angular, not the full surface area of the feature.
+- **Incremental complexity.** Start with the smallest working example, then add features one at a time.
+- **Layered learning.** Build the final concept in visible layers. Each layer is named and explained before the next one lands.
+- **Concept-first teaching.** Name the mental model before showing the full code.
+- **Vertical slice learning.** Each micro-lesson produces something runnable and understandable. The slice may touch the component file, the template, and the styles together, and it must produce a visible UI change.
+
+Anti-patterns to avoid in every lesson:
+
+- Big-bang example with several new concepts at once.
+- Fully composed upfront example before the mental model is introduced.
+- Top-down demonstration that shows the final shape and then dismantles it.
+- Production-first presentation that adds services, RxJS, validation, or routing before the lesson that introduces them.
+- High cognitive-load example that mixes new template syntax, new reactive primitives, and new component structure in one step.
+
 ## Lesson format for AI agents
 
-The study plan must be split into numbered lessons. Each lesson should be presented as two documentation pages in the `docs` folder:
+The study plan is organized as topic-level **modules**. Each module contains several **micro-lessons** that each introduce exactly one new Angular concept.
 
-1. A concept page that explains the Angular feature in plain language.
-2. A task page that asks the learner to implement a small feature demonstrating that concept.
+Lesson files live in the `docs/lessons` folder using this layout:
 
-Use this structure for lesson files:
+- `docs/lessons/module-MM-overview.md` — one per module.
+- `docs/lessons/lesson-MM-NN-concept.md` — one per micro-lesson.
+- `docs/lessons/lesson-MM-NN-task.md` — one per micro-lesson.
 
-- `docs/lessons/lesson-XX-concept.md`
-- `docs/lessons/lesson-XX-task.md`
+`MM` is the zero-padded module number. `NN` is the zero-padded micro-lesson number inside that module.
 
-The concept page should include:
+### Module overview page
 
-- The goal of the lesson.
-- The Angular v21 concept being introduced.
-- How the same idea would likely have appeared in Angular v15.
-- A brief comparison with React and Vue.js when useful.
-- Small code snippets that explain the idea before the learner edits the app.
+The module overview page carries the Angular v15, React, and Vue framing for the whole module. It includes:
 
-The task page should include:
+- The Angular topic area covered by the module.
+- The prior modules the learner is expected to have completed.
+- How the topic appeared in Angular v15.
+- A brief comparison with the equivalent React and Vue idea when useful.
+- A short outline of the micro-lessons in the module.
+
+### Concept page
+
+The concept page explains the single Angular feature introduced by the micro-lesson. It includes:
+
+- The goal of the micro-lesson.
+- The single Angular v21 concept being introduced.
+- The prior knowledge assumed from earlier micro-lessons.
+- A small code snippet that demonstrates the mental model before the learner edits the app.
+- A focused comparison with Angular v15, React, or Vue **only when the specific concept has a notable callout** (for example, `@for` `track` versus React `key`). Otherwise the module overview page carries the comparison and the concept page stays narrow.
+
+### Task page
+
+The task page asks the learner to implement the smallest change that demonstrates the concept. It includes:
 
 - The feature the learner will build.
 - The files they are expected to edit.
-- Step-by-step implementation instructions.
+- Step-by-step implementation instructions, kept to the minimum needed for one new concept.
 - A prediction prompt before running the app.
-- A checklist for verifying the result.
+- A checklist for verifying the result, including the visible UI change.
 - A short reflection prompt that connects the implementation back to the concept page.
 
 ## Suggested learning loop

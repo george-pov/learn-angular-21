@@ -1,35 +1,46 @@
 # Domain Docs
 
-How the engineering skills should consume this repo's domain documentation when exploring the codebase.
+How engineering skills should consume this repo's project and learning context
+when exploring the codebase.
 
 ## Before exploring, read these
 
-- **`CONTEXT.md`** at the repo root
-- **`docs/adr/`** for architectural decisions that touch the area you're about to work in
+- `README.md` at the repo root
+- `docs/angular-21-teaching-plan.md`
+- The relevant files under `docs/lessons/`
+- `.work/adr/` for local decisions that touch the area being changed
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The producer skill (`/grill-with-docs`) creates them lazily when terms or decisions actually get resolved.
+If any optional files do not exist, proceed silently. Do not suggest creating
+them upfront unless a decision or unresolved term actually needs to be recorded.
 
 ## File structure
 
-Single-context repo:
+Single-context learning repo:
 
 ```txt
 /
-├── CONTEXT.md
-├── docs/adr/
-│   ├── 0001-first-decision.md
-│   └── 0002-second-decision.md
+├── README.md
+├── docs/
+│   ├── angular-21-teaching-plan.md
+│   ├── agents/
+│   └── lessons/
+├── .work/
+│   └── adr/
 └── src/
 ```
 
-## Use the glossary's vocabulary
+## Use the repo's vocabulary
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+When your output names an Angular or learning concept in an issue title,
+refactor proposal, hypothesis, lesson, test name, or implementation note, use
+the terms already established in `README.md`, the teaching plan, and the lesson
+files. Do not drift between multiple names for the same concept.
 
-If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use, or there's a real gap to note for `/grill-with-docs`.
+If the concept you need is not named yet, use the closest existing codebase term
+and note the gap in the active `.work` record when one exists.
 
-## Flag ADR conflicts
+## Flag decision conflicts
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
-
-> Contradicts ADR-0007 (example decision), but worth reopening because...
+If your output contradicts an existing `.work/adr/` decision or the durable
+teaching direction in `README.md`, surface it explicitly rather than silently
+overriding it.

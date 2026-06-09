@@ -1,39 +1,23 @@
-.topic-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+ul {
   display: grid;
-  gap: 12px;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
 }
 
-.topic-item label {
+li {
+  border: 1px solid #d8dee4;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+label {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  min-height: 72px;
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-  padding: 16px;
-  cursor: pointer;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 700;
 }
 
-.topic-item input {
-  margin-top: 4px;
-  inline-size: 18px;
-  block-size: 18px;
-  accent-color: #2563eb;
-}
-
-.topic-item strong,
-.topic-item small {
-  display: block;
-}
-
-.topic-item strong {
-  margin-bottom: 4px;
-}
-
-.topic-item small {
-  color: #52606d;
-  line-height: 1.4;
+p {
+  margin: 0.5rem 0 0 1.5rem;
 }

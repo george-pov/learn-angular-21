@@ -1,43 +1,47 @@
-import { Component, computed, signal } from '@angular/core';
-import { INITIAL_TOPICS } from '../topics';
-import { Topic } from '../topic';
-import { TopicsList } from "../topics-list/topics-list";
+import { Component, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+import { Logger } from '../logger';
+import { TopicStore } from '../topic-store';
+import { TopicsList } from '../topics-list/topics-list';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [TopicsList],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
+  imports: [ReactiveFormsModule, TopicsList],
 })
 export class Dashboard {
-  protected readonly topics = signal<Topic[]>(
-    INITIAL_TOPICS.map(topic => ({ ...topic }))
-  );
+  protected readonly store = inject(TopicStore);
+  private readonly logger = inject(Logger);
 
-  protected readonly completedCount = computed(
-    () => this.topics().filter((topic) => topic.done).length,
-  );
-
-  protected readonly completedPercent = computed(() => {
-    const total = this.topics().length;
-    return total === 0 ? 0 : Math.round((this.completedCount() / total) * 100);
+  protected readonly topicForm = new FormGroup({
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    description: new FormControl('', {
+      nonNullable: true,
+    }),
   });
 
-  protected readonly allTopicsComplete = computed(
-    () => this.completedCount() === this.topics().length,
-  );
+  constructor() {
+    this.logger.log('Dashboard created');
+  }
 
-  protected readonly resetProgress = () => {
-    this.topics.update((topics) =>
-      topics.map((topic) => ({ ...topic, done: false })),
-    );
-  };
+  protected addTopic(): void {
+    if (this.topicForm.invalid) {
+      this.topicForm.markAllAsTouched();
+      return;
+    }
 
-  protected toggleTopic(id: number): void {
-    this.topics.update((topics) =>
-      topics.map((topic) =>
-        topic.id === id ? { ...topic, done: !topic.done } : topic,
-      ),
-    );
+    const value = this.topicForm.getRawValue();
+    this.store.addTopic(value.title, value.description);
+    this.topicForm.reset({ title: '', description: '' });
   }
 }

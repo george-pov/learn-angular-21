@@ -1,24 +1,27 @@
-import { Component, computed, input } from '@angular/core';
-import { INITIAL_TOPICS } from '../topics';
+import { Component, inject, input } from '@angular/core';
+
+import { Logger, LOGGER_PREFIX, VerboseLogger } from '../logger';
+import { TopicNotes } from '../topic-notes/topic-notes';
 
 @Component({
   selector: 'app-topic-details',
-  imports: [],
   templateUrl: './topic-details.html',
   styleUrl: './topic-details.scss',
+  imports: [TopicNotes],
+  providers: [
+    { provide: LOGGER_PREFIX, useValue: 'details' },
+    {
+      provide: Logger,
+      useFactory: (prefix: string) => new VerboseLogger(prefix),
+      deps: [LOGGER_PREFIX],
+    },
+  ],
 })
 export class TopicDetails {
-
   readonly id = input.required<string>();
+  private readonly logger = inject(Logger);
 
-  protected readonly topicId = computed(() => Number(this.id()));
-
-  protected readonly topic = computed(() => {
-    return INITIAL_TOPICS.find((topic) => topic.id === this.topicId());
-  });
-
-  protected readonly nextTopic = computed(() => {
-    return INITIAL_TOPICS.find((topic) => topic.id === this.topicId() + 1);
-  });
-
+  constructor() {
+    this.logger.log('TopicDetails created');
+  }
 }

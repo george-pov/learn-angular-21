@@ -1,17 +1,15 @@
-<ul class="topic-list">
+<ul>
   @for (topic of topics(); track topic.id) {
-    <li class="topic-item">
+    <li>
       <label>
-        <input type="checkbox" [checked]="topic.done" (change)="toggleTopic(topic.id)" />
-
-        <span>
-          <a [routerLink]="['/topics', topic.id]">
-            <strong>{{ topic.title }}</strong>
-          </a>
-          
-          <small>{{ topic.description }}</small>
-        </span>
+        <input
+          type="checkbox"
+          [checked]="topic.done"
+          (change)="onToggle(topic.id)"
+        />
+        <a [routerLink]="['/topics', topic.id]">{{ topic.title }}</a>
       </label>
+      <p>{{ topic.description }}</p>
     </li>
   }
 </ul>

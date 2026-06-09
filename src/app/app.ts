@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+import { APP_BUILD_LABEL } from './app-tokens';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterOutlet],
 })
 export class App {
+  protected readonly buildLabel = inject(APP_BUILD_LABEL);
 }

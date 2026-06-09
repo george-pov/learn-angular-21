@@ -1,33 +1,42 @@
-<main class="learning-shell">
+<section class="dashboard">
+  <h1>Angular 21 Learning Tracker</h1>
+  <p>A tiny app for learning modern Angular 21 one concept at a time.</p>
 
-  <section class="intro">
-    <p class="eyebrow">Lesson 1</p>
-    <h1>Angular 21 Learning Tracker</h1>
-    <p>
-      This tiny app uses signals for state, computed values for derived state, and modern template
-      control flow for rendering.
-    </p>
-  </section>
+  <p class="progress">{{ store.progressLabel() }}</p>
 
-  <section class="progress-panel" aria-labelledby="progress-heading">
-    <h2 id="progress-heading">Progress</h2>
+  @if (store.loadError(); as message) {
+    <p class="notice">{{ message }}</p>
+  }
 
-    <p class="progress-count">{{ completedCount() }} of {{ topics().length }} topics complete</p>
-    <p>{{ completedPercent() }}% complete</p>
+  @if (store.allTopicsComplete()) {
+    <p>All topics complete.</p>
+  } @else {
+    <p>Keep going.</p>
+  }
 
-    <button type="button" (click)="resetProgress()">Reset progress</button>
+  <app-topics-list
+    [topics]="store.topics()"
+    (toggle)="store.toggleTopic($event)"
+  />
 
-    @if (allTopicsComplete()) {
-      <p class="complete-message">All topics complete. Time to build something slightly harder.</p>
-    } @else {
-      <p class="next-message">Toggle a topic to see Angular update the computed progress.</p>
+  <form class="topic-form" [formGroup]="topicForm" (ngSubmit)="addTopic()">
+    <label>
+      New topic title
+      <input type="text" formControlName="title" />
+    </label>
+
+    @if (
+      topicForm.controls.title.touched &&
+      topicForm.controls.title.hasError('required')
+    ) {
+      <p class="error">Title is required.</p>
     }
-  </section>
 
-  <section class="topic-panel" aria-labelledby="topics-heading">
-    <h2 id="topics-heading">Topics</h2>
+    <label>
+      Description
+      <textarea formControlName="description"></textarea>
+    </label>
 
-    <app-topics-list [topics]="topics()" (toggle)="toggleTopic($event)"></app-topics-list>
-  </section>
-  
-</main>
+    <button type="submit" [disabled]="topicForm.invalid">Add topic</button>
+  </form>
+</section>
