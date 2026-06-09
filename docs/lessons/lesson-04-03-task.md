@@ -56,4 +56,4 @@ Before running the app, predict whether the button starts enabled or disabled. W
 
 - Why does the button read `titleControl.invalid` instead of checking the input text directly?
 - What form state changed when you typed?
-- How would you have written this rule by hand in React?
+- Which part of the rendering loop caused the button to update?

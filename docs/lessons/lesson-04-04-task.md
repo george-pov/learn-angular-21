@@ -1,4 +1,4 @@
-# Lesson 04-04 Task: Show Validation Feedback After Touch
+# Lesson 04-04 Task: Show Validation Feedback After Interaction
 
 ## Feature to build
 
@@ -14,7 +14,7 @@ Show `Title is required.` only after the title input has been focused and blurre
 
    ```html
    @if (titleControl.touched && titleControl.hasError('required')) {
-     <p>Title is required.</p>
+     <p class="error">Title is required.</p>
    }
    ```
 
@@ -47,5 +47,5 @@ Before running the app, predict what happens in each case:
 ## Reflection
 
 - Why is `touched` a better display condition than `invalid` by itself?
+- Which browser event makes a control touched?
 - What does `hasError('required')` check?
-- How does `@if` keep the validation message local to the template?

@@ -52,7 +52,7 @@ No feature folders, no `Topic` type, no seed topics, no child components. Module
 | 01 | Components, Signals, and Templates | The mental model for modern Angular component code. Primitive signals only. |
 | 02 | Lists and Composition | The topic array, `@for`, `track`, child components, signal inputs, outputs. |
 | 03 | Routing | `provideRouter`, `RouterOutlet`, `RouterLink`, route params, `loadComponent`. |
-| 04 | Forms | Template-driven `ngModel`, then reactive `FormControl` and `FormGroup`, validation, submission. |
+| 04 | Forms | Manual signal input baseline, reactive `FormControl` and `FormGroup` mechanics, validation rendering, experimental Signal Forms. |
 | 05 | Dependency Injection | `inject()`, root services, signals in services, scoped providers, alternative providers. |
 | 06 | HTTP | `provideHttpClient`, GET, error handling, POST, signal/observable interop, against a local `json-server` API. |
 | 07 | Deferrable Views | `@defer`, triggers, loading and placeholder and error blocks. |
@@ -78,7 +78,7 @@ Micro-lessons:
 - **01-03 Update a signal from an event.** Concept: template event binding `(click)` and the `signal.set` / `signal.update` writer API. Change: add a "Mark one complete" button that calls a `markOneComplete()` method on the component. The counter visibly increments on click.
 - **01-04 Derive state with `computed`.** Concept: `computed()` for derived values, automatic dependency tracking. Change: add a fixed `totalTopics = signal(4);` and a `progressLabel = computed(() => …)` that renders `"X of Y topics complete"`. The label updates as the counter changes.
 - **01-05 Conditional rendering with `@if`.** Concept: the `@if` block as the modern replacement for `*ngIf`. Change: when `completedCount()` equals `totalTopics()`, show a "All topics complete" message inside an `@if`; otherwise show a "Keep going" message inside `@else`.
-- **01-06 Two-way text input with a signal.** Concept: binding an `<input>` to a signal manually via `[value]` and `(input)`. Change: add a `currentTitle = signal('')` and a text input; show `{{ currentTitle() }}` live underneath. This sets up the typing pattern that Module 04 will replace with `ngModel` and reactive forms.
+- **01-06 Two-way text input with a signal.** Concept: binding an `<input>` to a signal manually via `[value]` and `(input)`. Change: add a `currentTitle = signal('')` and a text input; show `{{ currentTitle() }}` live underneath. This sets up the input synchronization pattern that Module 04 will analyze directly, then compare with reactive forms and Signal Forms.
 
 End-of-module visible state: a tracker page with a counter, a derived progress label, conditional messages, and a live text echo. No arrays, no child components, no router.
 
@@ -128,22 +128,24 @@ End-of-module visible state: a header with a Dashboard link, the dashboard at `/
 
 ## Module 04: Forms
 
-Topic: collect user input first with template-driven forms and then with reactive forms.
+Topic: collect user input with explicit form state, validation feedback, submission, and the rendering mechanics behind Angular forms.
 
 Prior modules required: Modules 01–03.
 
-After this module the learner can use `ngModel` for simple two-way binding, build a reactive form from `FormControl` and `FormGroup`, attach validators, show validation feedback after a control is touched, and submit a form that writes into a signal.
+After this module the learner can explain the manual signal input loop, build a reactive form from `FormControl` and `FormGroup`, attach validators, render feedback from touched and invalid state, submit a reactive form, and compare that stable forms engine with the experimental Signal Forms API introduced in Angular 21.
 
 Micro-lessons:
 
-- **04-01 Replace the manual input binding with `ngModel`.** Concept: template-driven forms via `FormsModule` and `[(ngModel)]`. Change: revisit the leftover `currentTitle` text input from Module 01 (now living in `Dashboard` after Module 03's move). Import `FormsModule`, bind the input with `[(ngModel)]="currentTitle"`. The `(input)` handler from 01-06 disappears. Visible behavior is identical; the code shrinks.
-- **04-02 Introduce a single reactive `FormControl`.** Concept: `FormControl` as an explicit model of one form field; `ReactiveFormsModule` and `[formControl]`. Change: replace the `ngModel` input on the dashboard with `protected readonly titleControl = new FormControl('', { nonNullable: true });` and `[formControl]="titleControl"` in the template. Render `{{ titleControl.value }}` underneath to confirm it works.
-- **04-03 Add a required validator.** Concept: `Validators.required` and how a control exposes `valid`/`invalid`/`touched` state. Change: pass `{ nonNullable: true, validators: [Validators.required] }` to the control. Add a disabled submit button bound to `[disabled]="titleControl.invalid"`. Visible: the button stays disabled until the user types one character.
-- **04-04 Show validation feedback after touch.** Concept: `touched` state and conditional error rendering with `@if`. Change: add an `@if (titleControl.touched && titleControl.hasError('required')) { … }` block that renders "Title is required" below the input. Visible: the message only appears once the user has focused and blurred the empty input.
-- **04-05 Combine controls into a `FormGroup`.** Concept: `FormGroup` for multi-field forms; `formGroup` and `formControlName` directives. Change: introduce `topicForm = new FormGroup({ title: …, description: … })`. Replace the bare `[formControl]` binding with `[formGroup]="topicForm"` on a `<form>` element, with `formControlName="title"` / `formControlName="description"` on the inputs. The submit button binds to `[disabled]="topicForm.invalid"`.
-- **04-06 Submit the form and append a topic.** Concept: `(ngSubmit)`, reading values with `getRawValue()`, immutable signal append. Change: add `(ngSubmit)="addTopic()"`. `addTopic()` reads `topicForm.getRawValue()`, computes the next id, appends to the `topics` signal, and calls `topicForm.reset(...)`. Visible: submitting a valid form adds a new row to the topic list; an invalid submission marks fields as touched and shows the validation message.
+- **04-01 Keep a manual signal input as the baseline.** Concept: `[value]` plus `(input)` is the raw two-direction loop behind a text field. Change: keep the dashboard input bound to `currentTitle = signal('')`, render the live echo, and name the browser event to signal to template update sequence explicitly.
+- **04-02 Introduce a single reactive `FormControl`.** Concept: `FormControl` as an explicit model of one field; `ReactiveFormsModule` and `[formControl]` as the directive bridge. Change: replace the manual input with `protected readonly titleControl = new FormControl('', { nonNullable: true });`, bind it with `[formControl]="titleControl"`, and render `{{ titleControl.value }}` underneath.
+- **04-03 Add a required validator.** Concept: `Validators.required`, synchronous validation timing, and status reads. Change: pass `{ nonNullable: true, validators: [Validators.required] }` to the control. Add a disabled submit button bound to `[disabled]="titleControl.invalid"`. Visible: the button stays disabled until the user types one character.
+- **04-04 Show validation feedback after touch.** Concept: `touched` state, blur handling, and conditional error rendering with `@if`. Change: render "Title is required" only when the field is both touched and failing the required validator. Visible: the message appears after the learner focuses and blurs an empty field.
+- **04-05 Combine controls into a `FormGroup`.** Concept: `FormGroup` for multi-field state; `[formGroup]` and `formControlName` as name-based bindings. Change: introduce `topicForm = new FormGroup({ title: ..., description: ... })`, bind a `<form>` to it, and add a title input plus description textarea.
+- **04-06 Submit the reactive form and append a topic.** Concept: `(ngSubmit)`, value snapshots, invalid-submit guards, and reset. Change: add `(ngSubmit)="addTopic()"`. `addTopic()` checks `topicForm.invalid`, marks controls touched when needed, reads `topicForm.getRawValue()`, appends to the `topics` signal, and resets the form.
+- **04-07 Introduce experimental Signal Forms.** Concept: a writable signal model becomes the source of truth, and `form()` creates a field tree that mirrors that model. Change: replace the reactive form with `topicDraft = signal({ title: '', description: '' })`, `topicForm = form(topicDraft)`, and `[formField]` bindings for the title and description fields.
+- **04-08 Validate and submit with Signal Forms.** Concept: schema validation, field state signals, `FormRoot`, submission actions, and `submitting()`. Change: add `required(path.title, { message: 'Title is required.' })`, render errors from `topicForm.title().errors()`, bind `[formRoot]="topicForm"`, and move the append/reset work into the Signal Forms submission action.
 
-End-of-module visible state: a working reactive form on the dashboard that adds new topics to the list.
+End-of-module visible state: a working Signal Forms dashboard form that validates the title, renders touched-field feedback, disables duplicate submissions while the action runs, and adds new topics to the list.
 
 ---
 

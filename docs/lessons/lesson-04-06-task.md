@@ -1,8 +1,8 @@
-# Lesson 04-06 Task: Submit the Form and Append a Topic
+# Lesson 04-06 Task: Submit the Reactive Form and Append a Topic
 
 ## Feature to build
 
-Submit a valid form, append a topic to the local topic signal, reset the form, and show validation feedback for invalid submissions.
+Submit a valid reactive form, append a topic to the local topic signal, reset the form, and show validation feedback for invalid submissions.
 
 ## Files to edit
 
@@ -77,7 +77,7 @@ Submit a valid form, append a topic to the local topic signal, reset the form, a
 4. In `dashboard.html`, add `(ngSubmit)` to the form and change the button to a submit button:
 
    ```html
-   <form [formGroup]="topicForm" (ngSubmit)="addTopic()">
+   <form class="topic-form" [formGroup]="topicForm" (ngSubmit)="addTopic()">
      <!-- existing labels and validation message -->
 
      <button type="submit" [disabled]="topicForm.invalid">
@@ -114,7 +114,3 @@ Before running the app, predict what happens after submitting `Reactive forms` w
 - Why does the handler still check `topicForm.invalid` when the button is disabled?
 - Why does the signal update return a new array instead of mutating the existing one?
 - What part of this lesson is Angular forms, and what part is ordinary TypeScript list update logic?
-
-## End-of-module checkpoint
-
-After this lesson the dashboard has a reactive form with title and description fields. Submitting the form adds a new topic to the list. Module 05 will move topic state out of `Dashboard` and into an injectable store service.

@@ -39,9 +39,9 @@ Replace `titleControl` with `topicForm`, a `FormGroup` containing `title` and `d
 3. In `dashboard.html`, replace the single-control markup with a form group:
 
    ```html
-   <form [formGroup]="topicForm">
+   <form class="topic-form" [formGroup]="topicForm">
      <label>
-       New topic title:
+       New topic title
        <input type="text" formControlName="title" />
      </label>
 
@@ -49,11 +49,11 @@ Replace `titleControl` with `topicForm`, a `FormGroup` containing `title` and `d
        topicForm.controls.title.touched &&
        topicForm.controls.title.hasError('required')
      ) {
-       <p>Title is required.</p>
+       <p class="error">Title is required.</p>
      }
 
      <label>
-       Description:
+       Description
        <textarea formControlName="description"></textarea>
      </label>
 

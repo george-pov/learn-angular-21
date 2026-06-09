@@ -2,7 +2,7 @@
 
 ## Feature to build
 
-Replace `ngModel` with a non-nullable `FormControl` and render the control's current value.
+Replace the manual signal input with a non-nullable `FormControl` and render the control's current value.
 
 ## Files to edit
 
@@ -11,19 +11,19 @@ Replace `ngModel` with a non-nullable `FormControl` and render the control's cur
 
 ## Steps
 
-1. In `dashboard.ts`, replace the `FormsModule` import with reactive forms imports:
+1. In `dashboard.ts`, import reactive forms pieces:
 
    ```ts
    import { FormControl, ReactiveFormsModule } from '@angular/forms';
    ```
 
-2. In the component metadata, replace `FormsModule` with `ReactiveFormsModule`:
+2. Add `ReactiveFormsModule` to the component imports. Keep `TopicsList` there:
 
    ```ts
    imports: [ReactiveFormsModule, TopicsList],
    ```
 
-3. Replace the `currentTitle` string property with a `FormControl`:
+3. Replace `currentTitle` with a `FormControl`:
 
    ```ts
    protected readonly titleControl = new FormControl('', {
@@ -31,13 +31,14 @@ Replace `ngModel` with a non-nullable `FormControl` and render the control's cur
    });
    ```
 
-4. In `dashboard.html`, replace `[(ngModel)]` with `[formControl]`:
+4. In `dashboard.html`, replace the manual input binding with `[formControl]`:
 
    ```html
    <label>
-     New topic title:
+     New topic title
      <input type="text" [formControl]="titleControl" />
    </label>
+
    <p>You typed: {{ titleControl.value }}</p>
    ```
 
@@ -52,11 +53,11 @@ Before running the app, predict whether the echo paragraph will still update as 
 - The dashboard still renders at `/`.
 - Typing in the input updates `You typed: ...`.
 - The component imports `ReactiveFormsModule`.
-- The component no longer imports `FormsModule`.
-- There is still only one form field. Validation and submission come later.
+- There is still only one form field.
+- Validation and submission have not been added yet.
 
 ## Reflection
 
 - What does `titleControl.value` represent?
 - Why is the control declared in TypeScript instead of only in the template?
-- What does `nonNullable: true` protect you from?
+- What does the forms directive do between the input and the control?

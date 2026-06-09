@@ -34,13 +34,14 @@ That is what "two-way binding" actually is: one binding for each direction.
 
 ## Why do it the hard way?
 
-Modules 02 and 04 will introduce more ergonomic options:
+Modules 02 and 04 will introduce more structured options:
 
-- Lesson 04-01 replaces this with template-driven `[(ngModel)]`.
+- Lesson 04-01 keeps this baseline and names the mechanics clearly.
 - Lesson 04-02 replaces it with reactive `[formControl]`.
+- Lessons 04-07 and 04-08 compare it with experimental Signal Forms.
 
 Doing it manually here makes the mechanics obvious: a binding for each direction, no magic. Every higher-level form API is built on top of this.
 
 ## Comparison callout
 
-In React, this is a controlled input: `<input value={x} onChange={e => setX(e.target.value)} />`. Same two directions, same shape. Vue collapses both into `v-model` by default; Lesson 04-01 shows Angular's equivalent (`[(ngModel)]`).
+In React, this is a controlled input: `<input value={x} onChange={e => setX(e.target.value)} />`. Same two directions, same shape. Vue collapses both into `v-model` by default. Module 04 compares this raw loop with Angular reactive forms and Signal Forms.

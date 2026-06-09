@@ -1,8 +1,8 @@
-# Lesson 04-01 Task: Replace the Manual Input Binding With `ngModel`
+# Lesson 04-01 Task: Keep a Manual Signal Input as the Baseline
 
 ## Feature to build
 
-Import `FormsModule`, bind the title input with `[(ngModel)]`, and keep the same live echo from Lesson 01-06.
+Keep the title draft as a signal and render a live echo from the manual input binding.
 
 ## Files to edit
 
@@ -11,60 +11,51 @@ Import `FormsModule`, bind the title input with `[(ngModel)]`, and keep the same
 
 ## Steps
 
-1. In `dashboard.ts`, import `FormsModule`:
+1. In `dashboard.ts`, make sure `signal` is imported from Angular:
 
    ```ts
-   import { FormsModule } from '@angular/forms';
+   import { Component, signal } from '@angular/core';
    ```
 
-2. Add `FormsModule` to the component imports. Keep `TopicsList` there:
+   Keep any existing imports the dashboard already needs.
+
+2. Add a title draft signal to `Dashboard`:
 
    ```ts
-   @Component({
-     selector: 'app-dashboard',
-     templateUrl: './dashboard.html',
-     styleUrl: './dashboard.scss',
-     imports: [FormsModule, TopicsList],
-   })
-   export class Dashboard {
-     // ...
-   }
+   protected readonly currentTitle = signal('');
    ```
 
-3. Replace the `currentTitle` signal with a plain string property:
-
-   ```ts
-   protected currentTitle = '';
-   ```
-
-   Leave the `topics` signal and `progressLabel` computed value alone.
-
-4. In `dashboard.html`, replace the manual input binding:
+3. In `dashboard.html`, add the draft input near the form area:
 
    ```html
    <label>
-     New topic title:
-     <input type="text" [(ngModel)]="currentTitle" />
+     New topic title
+     <input
+       type="text"
+       [value]="currentTitle()"
+       (input)="currentTitle.set($any($event.target).value)"
+     />
    </label>
-   <p>You typed: {{ currentTitle }}</p>
+
+   <p>You typed: {{ currentTitle() }}</p>
    ```
 
-5. Remove the old `[value]="currentTitle()"` and `(input)="currentTitle.set(...)"` bindings.
+4. Do not add validation or submission yet.
 
 ## Prediction
 
-Before running the app, predict what the echo paragraph shows before typing and what it shows after entering `forms`.
+Before running the app, predict which parts of the template re-render when you type `forms`.
 
 ## Verify
 
 - The dashboard still renders at `/`.
 - Typing in the input updates the echo live.
 - The topic list and checkboxes still work.
-- There is no `(input)` handler in the template.
-- `FormsModule` is imported by `Dashboard`, not by `App`.
+- The draft value is stored in a signal.
+- There is still no validation message and no submit behavior.
 
 ## Reflection
 
-- What did `[(ngModel)]` replace from the manual binding?
-- Why did `currentTitle` become a string property instead of staying a signal?
-- How does this compare with Vue's `v-model`?
+- Which binding moves data from the signal to the DOM?
+- Which binding moves data from the DOM to the signal?
+- Why is this a useful baseline before learning Angular forms APIs?

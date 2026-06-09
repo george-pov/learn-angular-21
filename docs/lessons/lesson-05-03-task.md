@@ -6,7 +6,7 @@ Move `topics`, `toggleTopic`, and topic appending from `Dashboard` into `TopicSt
 
 ## Starting point
 
-`Dashboard` injects `TopicStore` and renders `store.getGreeting()`. Topic state, progress computations, and the reactive form still live in `Dashboard`.
+`Dashboard` injects `TopicStore` and renders `store.getGreeting()`. Topic state, progress computations, and the Signal Forms form still live in `Dashboard`.
 
 ## Files to edit
 
@@ -85,22 +85,17 @@ Move `topics`, `toggleTopic`, and topic appending from `Dashboard` into `TopicSt
 
 4. In `dashboard.ts`, remove the local `topics` signal and `toggleTopic` method.
 
-5. Keep the form in `Dashboard`, but update `Dashboard.addTopic()` so it delegates the final state change to the store:
+5. Keep the form in `Dashboard`, but update the Signal Forms `submission.action` so it delegates the final state change to the store:
 
    ```ts
-   const value = this.topicForm.getRawValue();
-   this.store.addTopic(value.title, value.description);
-   this.topicForm.reset({ title: '', description: '' });
+   action: async (field) => {
+     const value = field().value();
+     this.store.addTopic(value.title, value.description);
+     field().reset({ title: '', description: '' });
+   },
    ```
 
-   Keep the existing invalid-submit guard from Module 04:
-
-   ```ts
-   if (this.topicForm.invalid) {
-     this.topicForm.markAllAsTouched();
-     return;
-   }
-   ```
+   Do not add a separate invalid-submit guard. The Signal Forms submission flow only runs the action after validation passes.
 
 6. Keep any dashboard `computed` values for now, but make them read from `this.store.topics()` instead of `this.topics()`. They move into the store in Lesson 05-04.
 

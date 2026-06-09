@@ -30,7 +30,7 @@ The private writable signal protects the update path. Components can read `store
 ## Prior knowledge assumed
 
 - Lesson 02-03: immutable updates to an array signal.
-- Lesson 04-06: the dashboard form appends new topics.
+- Lesson 04-08: the dashboard Signal Forms submission action appends new topics.
 - Lesson 05-02: `Dashboard` can inject `TopicStore`.
 
 ## Mental model
@@ -49,7 +49,7 @@ Before this lesson:
 
 - `Dashboard` owns `topics`.
 - `Dashboard` owns `toggleTopic`.
-- `Dashboard` owns the append logic in `addTopic`.
+- `Dashboard` owns the append logic inside the form submission action.
 
 After this lesson:
 
@@ -103,6 +103,8 @@ The store only needs the final data that changes the topic list:
 ```ts
 this.store.addTopic(value.title, value.description);
 ```
+
+With Signal Forms, that call lives inside the `submission.action` function. The form model, touched state, errors, and submitting flag still stay in `Dashboard`; the store receives only the final domain command.
 
 That split keeps the service focused on topic state, not form UI state.
 
