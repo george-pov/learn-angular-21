@@ -45,7 +45,7 @@ Add an E2E test that fills the dashboard form, submits it, and verifies the new 
 
 ## Prediction
 
-Before running the test, predict what happens if the title field is left empty and the button remains disabled.
+Before running the test, predict what happens if the title field is left empty. Does the Signal Forms submission action run?
 
 ## Verify
 

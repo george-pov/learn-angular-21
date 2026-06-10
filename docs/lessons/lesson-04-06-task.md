@@ -6,50 +6,13 @@ Submit a valid reactive form, append a topic to the local topic signal, reset th
 
 ## Files to edit
 
-- `src/app/topic.ts`
 - `src/app/dashboard/dashboard.ts`
 - `src/app/dashboard/dashboard.html`
 - `src/app/topics-list/topics-list.html`
 
 ## Steps
 
-1. In `topic.ts`, add a description to the model:
-
-   ```ts
-   export type Topic = {
-     id: number;
-     title: string;
-     description: string;
-     done: boolean;
-   };
-   ```
-
-2. In `dashboard.ts`, update the seed topics so each topic has a description:
-
-   ```ts
-   protected readonly topics = signal<Topic[]>([
-     {
-       id: 1,
-       title: 'Standalone components',
-       description: 'Understand component metadata and standalone imports.',
-       done: true,
-     },
-     {
-       id: 2,
-       title: 'Signals',
-       description: 'Use signals for local reactive state.',
-       done: false,
-     },
-     {
-       id: 3,
-       title: 'Template control flow',
-       description: 'Render branches and lists with modern template syntax.',
-       done: false,
-     },
-   ]);
-   ```
-
-3. Add the submit handler to `Dashboard`:
+1. Add the submit handler to `Dashboard`:
 
    ```ts
    protected addTopic(): void {
@@ -74,7 +37,7 @@ Submit a valid reactive form, append a topic to the local topic signal, reset th
    }
    ```
 
-4. In `dashboard.html`, add `(ngSubmit)` to the form and change the button to a submit button:
+2. In `dashboard.html`, add `(ngSubmit)` to the form and change the button to a submit button:
 
    ```html
    <form class="topic-form" [formGroup]="topicForm" (ngSubmit)="addTopic()">
@@ -86,7 +49,7 @@ Submit a valid reactive form, append a topic to the local topic signal, reset th
    </form>
    ```
 
-5. In `topics-list.html`, render the description under each title:
+3. In `topics-list.html`, render the description under each title:
 
    ```html
    <p>{{ topic.description }}</p>

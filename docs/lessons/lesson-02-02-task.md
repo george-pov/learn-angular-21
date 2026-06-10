@@ -23,9 +23,24 @@ Replace the counter and `markOneComplete` button with a real array of topics. Re
 
    ```ts
    protected readonly topics = signal<Topic[]>([
-     { id: 1, title: 'Standalone components', done: true },
-     { id: 2, title: 'Signals', done: false },
-     { id: 3, title: 'Template control flow', done: false },
+     {
+       id: 1,
+       title: 'Standalone components',
+       description: 'Understand component metadata and standalone imports.',
+       done: true,
+     },
+     {
+       id: 2,
+       title: 'Signals',
+       description: 'Use signals for local reactive state.',
+       done: false,
+     },
+     {
+       id: 3,
+       title: 'Template control flow',
+       description: 'Render branches and lists with modern template syntax.',
+       done: false,
+     },
    ]);
    ```
 
@@ -72,6 +87,7 @@ What will the page render? What will the label say on first load?
 - The page lists three topics.
 - The label reads `1 of 3 topics complete` (because the first topic is `done: true`).
 - The "Keep going." / "All topics complete." message reflects the seed data.
+- The list renders topic titles only for now, even though each topic also has a description.
 - The button is gone.
 - The text input still works.
 

@@ -24,5 +24,5 @@ Run `npm run api` in one terminal and `npm start` in another for this module. Th
 - 06-02 Register `HttpClient`: `provideHttpClient()` in `app.config.ts`.
 - 06-03 GET the topic list: inject `HttpClient` and subscribe to `http.get<T>()`.
 - 06-04 Handle a load error: observable error callback surfaced in a signal.
-- 06-05 POST a new topic: `http.post<T>()` and server-assigned ids.
+- 06-05 POST a new topic: `http.post<T>()`, server-assigned ids, and a local save fallback for later browser tests.
 - 06-06 Bridge an observable to a signal with `toSignal`: expose an API preview signal and discuss when to keep manual subscriptions.

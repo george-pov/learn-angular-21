@@ -2,7 +2,7 @@
 
 ## Goal
 
-Send new topics to the API and append the topic returned by the server.
+Send new topics to the API, append the topic returned by the server, and keep a local fallback when the API is unavailable.
 
 ## The single new concept
 
@@ -17,15 +17,27 @@ addTopic(title: string, description: string): void {
       this.loadError.set(null);
       this.topicsSignal.update((current) => [...current, topic]);
     },
+    error: () => {
+      const nextId = Math.max(
+        0,
+        ...this.topicsSignal().map((topic) => topic.id),
+      ) + 1;
+      this.topicsSignal.update((current) => [
+        ...current,
+        { id: nextId, ...body },
+      ]);
+      this.loadError.set('Saved locally because the API is not running.');
+    },
   });
 }
 ```
 
-The client no longer computes the next id. The API assigns the id and returns the complete `Topic`.
+The success path no longer computes the next id. The API assigns the id and returns the complete `Topic`. The error path computes a local id only as a fallback so the learning app remains usable when the local API is stopped.
 
 ## Prior knowledge assumed
 
-- Lesson 04-06: form submission calls `store.addTopic(...)`.
+- Lesson 04-08: the Signal Forms submission action submits the topic draft.
+- Lesson 05-03: form submission delegates to `store.addTopic(...)`.
 - Lesson 06-03: HTTP responses are handled with `subscribe`.
 - Lesson 06-04: errors can be surfaced through `loadError`.
 
@@ -44,17 +56,19 @@ The response is the source of truth after a POST because it includes the server-
 
 Appending the original request body would miss the id.
 
-## Error path
+## Error path and local fallback
 
-This lesson can reuse `loadError` for save failures:
+This lesson reuses `loadError` for save failures, but it still appends the topic locally:
 
 ```ts
 error: () => {
-  this.loadError.set('Could not save topic. Make sure npm run api is running.');
+  const nextId = Math.max(0, ...this.topicsSignal().map((topic) => topic.id)) + 1;
+  this.topicsSignal.update((current) => [...current, { id: nextId, ...body }]);
+  this.loadError.set('Saved locally because the API is not running.');
 }
 ```
 
-Do not add optimistic updates yet. The visible list should change only after the API confirms the new topic.
+This is not a production offline-sync design. It is a learning-project fallback that keeps later component and E2E tests independent from `json-server`.
 
 ## Comparison callout
 

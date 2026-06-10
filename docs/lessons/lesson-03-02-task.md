@@ -67,9 +67,24 @@ A new `Dashboard` component that holds the entire tracker UI from Module 02. The
      protected readonly currentTitle = signal('');
 
      protected readonly topics = signal<Topic[]>([
-       { id: 1, title: 'Standalone components', done: true },
-       { id: 2, title: 'Signals', done: false },
-       { id: 3, title: 'Template control flow', done: false },
+       {
+         id: 1,
+         title: 'Standalone components',
+         description: 'Understand component metadata and standalone imports.',
+         done: true,
+       },
+       {
+         id: 2,
+         title: 'Signals',
+         description: 'Use signals for local reactive state.',
+         done: false,
+       },
+       {
+         id: 3,
+         title: 'Template control flow',
+         description: 'Render branches and lists with modern template syntax.',
+         done: false,
+       },
      ]);
 
      protected readonly progressLabel = computed(() => {

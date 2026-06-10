@@ -1,30 +1,93 @@
-# Lesson 03-04 Task: Add a second route
+# Lesson 03-04 Task: Add a Second Route
 
-## Feature
+## Feature to build
 
-Create TopicDetails, register /topics/:id and ** redirect, and link each topic title to its details route.
+Create a `TopicDetails` page, register `/topics/:id`, add a wildcard redirect, and link each topic title to its details route.
+
+## Files to create
+
+- `src/app/topic-details/topic-details.ts`
+- `src/app/topic-details/topic-details.html`
+- `src/app/topic-details/topic-details.scss`
 
 ## Files to edit
 
-Use the current app files needed for this slice. Most lessons touch one page or one service plus its template.
+- `src/app/app.routes.ts`
+- `src/app/topics-list/topics-list.ts`
+- `src/app/topics-list/topics-list.html`
 
 ## Steps
 
-1. Open the file named by the concept page or teaching plan for this lesson.
-2. Add only the code needed for multiple routes and a wildcard fallback.
-3. Keep the previous lesson's behavior working.
-4. Run the app and verify the visible change.
+1. Create `topic-details.scss` empty.
 
-## Prediction prompt
+2. Create `topic-details.html`:
 
-Before running the app, predict which text, route, form state, or list item should change.
+   ```html
+   <h2>Topic details placeholder</h2>
+   ```
 
-## Verification checklist
+3. Create `topic-details.ts`:
 
-- The app compiles.
-- The visible behavior matches: Create TopicDetails, register /topics/:id and ** redirect, and link each topic title to its details route.
-- No later lesson concept is introduced early.
+   ```ts
+   import { Component } from '@angular/core';
+
+   @Component({
+     selector: 'app-topic-details',
+     templateUrl: './topic-details.html',
+     styleUrl: './topic-details.scss',
+   })
+   export class TopicDetails {}
+   ```
+
+4. In `app.routes.ts`, import `TopicDetails` and add the second route plus wildcard fallback:
+
+   ```ts
+   import { Routes } from '@angular/router';
+   import { Dashboard } from './dashboard/dashboard';
+   import { TopicDetails } from './topic-details/topic-details';
+
+   export const routes: Routes = [
+     { path: '', component: Dashboard },
+     { path: 'topics/:id', component: TopicDetails },
+     { path: '**', redirectTo: '' },
+   ];
+   ```
+
+5. In `topics-list.ts`, import `RouterLink` and add it to component imports:
+
+   ```ts
+   import { RouterLink } from '@angular/router';
+
+   @Component({
+     selector: 'app-topics-list',
+     templateUrl: './topics-list.html',
+     styleUrl: './topics-list.scss',
+     imports: [RouterLink],
+   })
+   ```
+
+6. In `topics-list.html`, replace the visible title text with a router link:
+
+   ```html
+   <a [routerLink]="['/topics', topic.id]">{{ topic.title }}</a>
+   ```
+
+   Keep the existing checkbox binding and toggle output unchanged.
+
+## Prediction
+
+Before running the app, predict what happens when you click the `Signals` topic title. What URL should the browser show?
+
+## Verify
+
+- Visiting `/` still shows the dashboard.
+- Clicking a topic title navigates to `/topics/1`, `/topics/2`, or `/topics/3`.
+- The details page shows `Topic details placeholder`.
+- Visiting an unknown URL redirects back to `/`.
+- The topic checkboxes still toggle from the dashboard.
 
 ## Reflection
 
-What did Angular provide in this lesson, and what code stayed ordinary TypeScript or HTML?
+- Why does the wildcard route belong last?
+- Why does `TopicsList` need `RouterLink` in its imports?
+- What part of `/topics/2` is static, and what part is a parameter?

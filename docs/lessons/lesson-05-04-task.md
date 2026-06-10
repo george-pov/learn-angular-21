@@ -51,7 +51,7 @@ Move completed count, total count, progress label, and completion status into `T
    }
    ```
 
-5. Leave the form group in `Dashboard`.
+5. Leave the Signal Forms model and form tree in `Dashboard`.
 
 6. Leave `TopicStore.addTopic()` and `TopicStore.toggleTopic()` unchanged. This lesson only moves derived state.
 

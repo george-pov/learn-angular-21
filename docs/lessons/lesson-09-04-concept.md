@@ -18,11 +18,12 @@ await expect(
 ).toBeVisible();
 ```
 
-The test does not call `Dashboard.addTopic()` and does not inject `TopicStore`.
+The test does not call Angular component methods and does not inject `TopicStore`.
 
 ## Prior knowledge assumed
 
-- Lesson 04-06: the dashboard form adds topics.
+- Lesson 04-08: the dashboard form uses Signal Forms.
+- Lesson 06-05: the store can add a topic locally when the API is unavailable.
 - Lesson 09-03: Playwright can find controls with user-facing locators.
 
 ## Workflow mental model
@@ -38,8 +39,8 @@ The test should follow the user's path:
 That path exercises several pieces together:
 
 - real browser input events
-- Angular reactive forms
-- the `(ngSubmit)` handler
+- Signal Forms field bindings
+- the `FormRoot` submit path
 - the injected store
 - template re-rendering
 
@@ -49,7 +50,7 @@ This would skip the browser workflow:
 
 ```ts
 // Not an E2E test.
-component.addTopic();
+store.addTopic('Playwright E2E', 'Drive the app through a browser.');
 ```
 
 That kind of direct call belongs in smaller Angular tests. In Playwright, the useful signal is that the user can complete the workflow through the page.
@@ -66,7 +67,7 @@ Do not guess timing with sleeps.
 
 ## API note
 
-Keep `npm run api` stopped for this lesson. The app's fallback path can still add the topic locally. Lesson 09-06 shows how to control API data explicitly.
+Keep `npm run api` stopped for this lesson. The save fallback from Lesson 06-05 can still add the topic locally without mutating `db.json`. Lesson 09-06 shows how to control API data explicitly.
 
 ## Comparison callout
 

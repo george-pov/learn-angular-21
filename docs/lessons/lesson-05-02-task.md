@@ -55,7 +55,7 @@ Before running the app, predict where the greeting will appear. Will the topic l
 - Submitting the form still adds a topic.
 - `TopicStore` still contains only `getGreeting()`.
 - `Dashboard` does not call `new TopicStore()`.
-- `Dashboard` still owns `topics`, `toggleTopic`, and the form submit handler.
+- `Dashboard` still owns `topics`, `toggleTopic`, and the Signal Forms submission action.
 
 ## Reflection
 

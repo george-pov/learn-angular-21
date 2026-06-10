@@ -6,7 +6,7 @@ Create `TopicStore` with a greeting method. Do not move dashboard state yet.
 
 ## Starting point
 
-Before this lesson, `Dashboard` should still own the topic signal, topic form, progress computations, and topic mutation methods from Module 04.
+Before this lesson, `Dashboard` should still own the topic signal, Signal Forms form, progress computations, and topic mutation logic from Module 04.
 
 ## Files to create
 

@@ -1,30 +1,57 @@
-# Lesson 03-06 Task: Lazy-load a routed component
+# Lesson 03-06 Task: Lazy-Load a Routed Component
 
-## Feature
+## Feature to build
 
-Switch route entries to loadComponent while keeping behavior identical.
+Switch the dashboard and topic details routes from eager `component` references to lazy `loadComponent` functions.
 
 ## Files to edit
 
-Use the current app files needed for this slice. Most lessons touch one page or one service plus its template.
+- `src/app/app.routes.ts`
 
 ## Steps
 
-1. Open the file named by the concept page or teaching plan for this lesson.
-2. Add only the code needed for loadComponent for route-level code splitting.
-3. Keep the previous lesson's behavior working.
-4. Run the app and verify the visible change.
+1. Remove the static imports for `Dashboard` and `TopicDetails` from `app.routes.ts`.
 
-## Prediction prompt
+2. Replace the route records with `loadComponent`:
 
-Before running the app, predict which text, route, form state, or list item should change.
+   ```ts
+   import { Routes } from '@angular/router';
 
-## Verification checklist
+   export const routes: Routes = [
+     {
+       path: '',
+       loadComponent: () =>
+         import('./dashboard/dashboard').then((m) => m.Dashboard),
+     },
+     {
+       path: 'topics/:id',
+       loadComponent: () =>
+         import('./topic-details/topic-details').then(
+           (m) => m.TopicDetails,
+         ),
+     },
+     { path: '**', redirectTo: '' },
+   ];
+   ```
 
-- The app compiles.
-- The visible behavior matches: Switch route entries to loadComponent while keeping behavior identical.
-- No later lesson concept is introduced early.
+3. Do not change `app.config.ts`.
+
+4. Do not change `Dashboard`, `TopicDetails`, or `TopicsList`.
+
+## Prediction
+
+Before running the app, predict whether any visible behavior changes. Where would you look to see lazy-loaded chunks?
+
+## Verify
+
+- Visiting `/` still renders the dashboard.
+- Clicking a topic still navigates to the details page.
+- The route id still renders on the details page.
+- Unknown URLs still redirect to `/`.
+- In browser DevTools, route chunks load when their route is visited.
 
 ## Reflection
 
-What did Angular provide in this lesson, and what code stayed ordinary TypeScript or HTML?
+- Why can `loadComponent` work without an NgModule wrapper?
+- Why is the visible behavior unchanged?
+- When might route-level lazy loading be useful in a larger app?

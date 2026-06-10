@@ -29,20 +29,21 @@ Submit the dashboard form in a test and assert the fake store adds the new topic
 2. Add a form-submission test:
 
    ```ts
-   it('adds a topic from the form', () => {
+   it('adds a topic from the form', async () => {
      const title: HTMLInputElement =
-       fixture.nativeElement.querySelector('input[formControlName="title"]');
+       fixture.nativeElement.querySelector('input[type="text"]');
      const description: HTMLTextAreaElement =
-       fixture.nativeElement.querySelector(
-         'textarea[formControlName="description"]',
-       );
+       fixture.nativeElement.querySelector('textarea');
      const form: HTMLFormElement = fixture.nativeElement.querySelector('form');
 
      title.value = 'Testing';
      title.dispatchEvent(new Event('input'));
      description.value = 'Write behavior-focused tests.';
      description.dispatchEvent(new Event('input'));
-     form.dispatchEvent(new Event('submit'));
+     form.dispatchEvent(
+       new Event('submit', { bubbles: true, cancelable: true }),
+     );
+     await fixture.whenStable();
      fixture.detectChanges();
 
      expect(fixture.nativeElement.textContent).toContain('Testing');
@@ -60,10 +61,10 @@ Before running the test, predict what happens if you set `title.value` but forge
 - The form-submission test passes.
 - The rendered list contains `Testing`.
 - The test does not require `npm run api`.
-- The test uses the form's submit event rather than calling the component method directly.
+- The test uses the form's submit event rather than calling the store method directly.
 
 ## Reflection
 
 - Why dispatch `input` after setting `.value`?
 - Why dispatch `submit` on the form?
-- Why is this more behavior-focused than calling a component method directly?
+- Why is this more behavior-focused than calling a store method directly?

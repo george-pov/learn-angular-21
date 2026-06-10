@@ -49,7 +49,7 @@ Do not use Playwright to retest every store method from Module 08. E2E tests are
 
 ## Module note
 
-Lessons 09-02 through 09-05 assume `npm run api` is not already running. The app falls back to local seed data when the local API is unavailable, which keeps the first E2E tests simple and avoids mutating `db.json`.
+Lessons 09-02 through 09-05 assume `npm run api` is not already running. The app falls back to local seed data for loading and to a local append for failed saves, which keeps the first E2E tests simple and avoids mutating `db.json`.
 
 Lesson 09-06 introduces explicit API control with Playwright request routing.
 

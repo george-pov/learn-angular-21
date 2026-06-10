@@ -81,7 +81,7 @@ The dashboard still owns:
 
 - `topics`
 - `topicForm`
-- `addTopic`
+- the Signal Forms submission action
 - `toggleTopic`
 - progress computations
 
