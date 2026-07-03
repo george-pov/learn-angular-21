@@ -75,7 +75,7 @@ That is different from Signal Forms, where the field value itself is read as a s
 {{ topicForm.title().value() }}
 ```
 
-This distinction matters in Angular 21. Reactive forms remain stable and widely used, but their state model is older than signals.
+This distinction matters in Angular 22. Reactive forms remain stable and widely used, but their state model is older than signals.
 
 ## Why this is different from a signal
 
@@ -92,7 +92,7 @@ A `FormControl` is not a signal. It is a richer field model that tracks:
 You read its value as a property:
 
 ```ts
-titleControl.value
+titleControl.value;
 ```
 
 You update it with methods:
@@ -108,7 +108,9 @@ The control can also emit value changes through observables, but this lesson doe
 By default, Angular controls can reset to `null`. This project wants the title to always be a string, so the control is created with:
 
 ```ts
-{ nonNullable: true }
+{
+  nonNullable: true;
+}
 ```
 
 That keeps the control value typed as `string` instead of `string | null`.
@@ -118,13 +120,13 @@ That keeps the control value typed as `string` instead of `string | null`.
 The manual lesson had this state:
 
 ```ts
-currentTitle = signal('')
+currentTitle = signal('');
 ```
 
 This lesson has this state:
 
 ```ts
-titleControl = new FormControl('')
+titleControl = new FormControl('');
 ```
 
 Both let the user type and see an echo. The difference is the amount of form behavior available on the state object. A signal only knows the current value. A `FormControl` also knows whether the value is valid, whether the user touched the field, and how to reset itself.

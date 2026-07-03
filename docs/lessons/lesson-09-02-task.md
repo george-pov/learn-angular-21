@@ -47,9 +47,7 @@ Configure Playwright to start the Angular dev server and write a dashboard smoke
    test('opens the dashboard', async ({ page }) => {
      await page.goto('/');
 
-     await expect(
-       page.getByRole('heading', { name: 'Angular 21 Learning Tracker' }),
-     ).toBeVisible();
+     await expect(page.getByRole('heading', { name: 'Angular 22 Learning Tracker' })).toBeVisible();
    });
    ```
 

@@ -8,7 +8,7 @@ This file is the root navigation and operating policy for agents. It points to
 durable learner-facing documentation and to local-only workflow records.
 
 This repository is not a production application. Treat it as a guided learning
-workspace for exploring modern Angular, currently targeting Angular 21. Optimize
+workspace for exploring modern Angular, currently targeting Angular 22. Optimize
 changes for small runnable examples, clear teaching value, and accurate mental
 models.
 
@@ -17,7 +17,7 @@ Use this hierarchy:
 1. `AGENTS.md`: root agent policy, document map, and task routing.
 2. `README.md`: durable learner-facing project context, teaching style, lesson
    format, and project commands.
-3. `docs/angular-21-teaching-plan.md`: durable lesson roadmap.
+3. `docs/angular-22-teaching-plan.md`: durable lesson roadmap.
 4. `docs/lessons/`: durable concept and task pages for numbered lessons.
 5. `docs/agents/`: durable skill integration notes for local issue tracking and
    domain documentation.
@@ -48,14 +48,13 @@ task:
 - Angular implementation: `.work/agents/process.md`,
   `.work/agents/coding-standards.md`, `.work/agents/testing.md`, and
   `.work/agents/validation.md`.
-- Lesson documentation: `README.md`, `docs/angular-21-teaching-plan.md`,
+- Lesson documentation: `README.md`, `docs/angular-22-teaching-plan.md`,
   `.work/agents/process.md`, and `.work/agents/validation.md`.
 - Domain or vocabulary-sensitive changes: `README.md` and
   `.work/agents/domain.md`.
 - Reviews: `.work/agents/review.md`.
 - Commits or PRs: `.work/agents/commits-and-prs.md`.
 - Local generated files: `.work/agents/local-artifacts.md`.
-
 
 ## Repository Boundaries
 
@@ -81,7 +80,7 @@ changes its purpose.
 - Prefer small vertical slices that keep the app runnable and teach one concept
   at a time.
 - Do not perform broad rewrites unless the user explicitly asks for them.
-- Prefer examples that fit the current Angular 21 workspace and installed
+- Prefer examples that fit the current Angular 22 workspace and installed
   dependencies.
 - When version-specific Angular behavior matters, verify it against installed
   package versions or official Angular documentation.

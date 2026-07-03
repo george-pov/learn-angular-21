@@ -15,7 +15,7 @@ export const STORAGE_KEY = new InjectionToken<string>('STORAGE_KEY');
 `useValue` provides the concrete value:
 
 ```ts
-{ provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' }
+{ provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' }
 ```
 
 The service injects the token:
@@ -46,7 +46,7 @@ Classes can be DI tokens because Angular can use the class itself as the token. 
 
 ```ts
 // Not a good DI token.
-'storage-key'
+'storage-key';
 ```
 
 Many strings can have the same value. `InjectionToken<string>` creates a unique token with a readable debug name.
@@ -54,13 +54,13 @@ Many strings can have the same value. `InjectionToken<string>` creates a unique 
 The debug name is not the injected value:
 
 ```ts
-new InjectionToken<string>('STORAGE_KEY')
+new InjectionToken<string>('STORAGE_KEY');
 ```
 
 `'STORAGE_KEY'` helps with debugging. The provided value comes from the provider record:
 
 ```ts
-{ provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' }
+{ provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' }
 ```
 
 ## Why use `useValue`
@@ -68,7 +68,7 @@ new InjectionToken<string>('STORAGE_KEY')
 Use `useValue` when the value already exists:
 
 ```ts
-{ provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' }
+{ provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' }
 ```
 
 Angular does not call a function or instantiate a class. It returns that exact value for the token.
@@ -90,7 +90,7 @@ Lesson 05-09 will persist topics to `localStorage`. This lesson sets up the conf
 Hardcoding the storage key inside `TopicStore` would work:
 
 ```ts
-private readonly storageKey = 'learn-angular-21-topics';
+private readonly storageKey = 'learn-angular-22-topics';
 ```
 
 Injecting it has two teaching benefits:

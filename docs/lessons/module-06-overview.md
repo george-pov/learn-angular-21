@@ -10,7 +10,7 @@ Modules 01-05.
 
 ## Angular v15, React, and Vue framing
 
-Angular v15 also used `HttpClient` and RxJS, but Angular 21 standalone apps usually register HTTP through application config with `provideHttpClient()`. React learners can compare `HttpClient` calls with `fetch` plus state. Vue learners can compare the store methods with composables that wrap `fetch`.
+Angular v15 also used `HttpClient` and RxJS, but Angular 22 standalone apps usually register HTTP through application config with `provideHttpClient()`. React learners can compare `HttpClient` calls with `fetch` plus state. Vue learners can compare the store methods with composables that wrap `fetch`.
 
 This module keeps the topic store as the state owner from Module 05. HTTP changes how the store loads and creates topics; it does not move state back into components.
 

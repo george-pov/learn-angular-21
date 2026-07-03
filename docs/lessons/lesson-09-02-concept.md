@@ -55,9 +55,7 @@ That makes `npm run e2e` closer to a one-command workflow.
 The first E2E assertion should be tiny:
 
 ```ts
-await expect(
-  page.getByRole('heading', { name: 'Angular 21 Learning Tracker' }),
-).toBeVisible();
+await expect(page.getByRole('heading', { name: 'Angular 22 Learning Tracker' })).toBeVisible();
 ```
 
 This proves:

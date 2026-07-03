@@ -70,9 +70,7 @@ Create `Dashboard` in a spec and assert the page title renders.
 
    ```ts
    it('renders the learning tracker title', () => {
-     expect(fixture.nativeElement.textContent).toContain(
-       'Angular 21 Learning Tracker',
-     );
+     expect(fixture.nativeElement.textContent).toContain('Angular 22 Learning Tracker');
    });
    ```
 

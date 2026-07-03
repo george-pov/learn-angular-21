@@ -81,7 +81,7 @@ Before running the app, predict what will happen after you add a topic, refresh 
 - Adding a topic still updates the list.
 - Refreshing the browser keeps the added topic.
 - Toggling a checkbox, refreshing, and returning to `/` keeps the checkbox state.
-- Clearing the `learn-angular-21-topics` item from browser storage restores the seed topics on the next refresh.
+- Clearing the `learn-angular-22-topics` item from browser storage restores the seed topics on the next refresh.
 - No HTTP code has been added. That starts in Module 06.
 - Invalid JSON in that storage item falls back to the seed topics.
 - Progress computed values still update from `topicsSignal`.

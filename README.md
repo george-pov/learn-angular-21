@@ -1,6 +1,6 @@
-# LearnAngular21
+# LearnAngular22
 
-This app is a small learning project for exploring modern Angular, using Angular v21 as the current target version.
+This app is a small learning project for exploring modern Angular, using Angular v22 as the current target version.
 
 ## AI tutor context
 
@@ -86,7 +86,7 @@ The module overview page carries the Angular v15, React, and Vue framing for the
 The concept page explains the single Angular feature introduced by the micro-lesson. It includes:
 
 - The goal of the micro-lesson.
-- The single Angular v21 concept being introduced.
+- The single Angular v22 concept being introduced.
 - The prior knowledge assumed from earlier micro-lessons.
 - A small code snippet that demonstrates the mental model before the learner edits the app.
 - A focused comparison with Angular v15, React, or Vue **only when the specific concept has a notable callout** (for example, `@for` `track` versus React `key`). Otherwise the module overview page carries the comparison and the concept page stays narrow.

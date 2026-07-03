@@ -11,14 +11,14 @@ Update the placeholder page so it shows a real tracker title plus one sentence o
 ## Steps
 
 1. Open `src/app/app.html`.
-2. Confirm the current content is a single `<h1>Angular 21 Learning Tracker</h1>`.
-3. Add a paragraph below the heading: `<p>A tiny app for learning modern Angular 21 one concept at a time.</p>`.
+2. Confirm the current content is a single `<h1>Angular 22 Learning Tracker</h1>`.
+3. Add a paragraph below the heading: `<p>A tiny app for learning modern Angular 22 one concept at a time.</p>`.
 
 Final template:
 
 ```html
-<h1>Angular 21 Learning Tracker</h1>
-<p>A tiny app for learning modern Angular 21 one concept at a time.</p>
+<h1>Angular 22 Learning Tracker</h1>
+<p>A tiny app for learning modern Angular 22 one concept at a time.</p>
 ```
 
 ## Prediction
@@ -34,4 +34,4 @@ Before running the app: what will appear on screen? What part of the change is H
 ## Reflect
 
 - What would happen if you removed `selector: 'app-root'` from `app.ts`? (Hint: look at `src/index.html`.)
-- In Angular v15, where would you typically declare this component? In Angular v21, why is no module needed?
+- In Angular v15, where would you typically declare this component? In Angular v22, why is no module needed?

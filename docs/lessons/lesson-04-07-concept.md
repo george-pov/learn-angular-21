@@ -1,8 +1,8 @@
-# Lesson 04-07 Concept: Introduce Experimental Signal Forms
+# Lesson 04-07 Concept: Introduce Stable Signal Forms
 
 ## Goal
 
-Replace the reactive `FormGroup` with Angular 21 experimental Signal Forms, using a writable signal as the form model.
+Replace the reactive `FormGroup` with Angular 22 stable Signal Forms, using a writable signal as the form model.
 
 ## The single new concept
 
@@ -33,9 +33,9 @@ The template binds inputs to field nodes:
 <textarea [formField]="topicForm.description"></textarea>
 ```
 
-In Angular 21, `form`, `FormField`, and related Signal Forms APIs are experimental.
+In Angular 22, `form`, `FormField`, and related Signal Forms APIs are stable.
 
-That status is important. The lesson teaches Signal Forms because they match Angular's signal direction, but it still treats reactive forms as the stable baseline for existing Angular code.
+That status matters for the curriculum. The lesson teaches Signal Forms because they match Angular's signal direction, while still treating reactive forms as an important baseline for existing Angular code.
 
 ## Prior knowledge assumed
 
@@ -53,8 +53,8 @@ topicForm = new FormGroup(...)
 
 Signal Forms use this source of truth:
 
-```ts
-topicDraft = signal({ title: '', description: '' })
+```text
+topicDraft = signal({ title: '', description: '' });
 ```
 
 The form field tree does not keep a separate copy of the draft data. It wraps the model signal. When a user types into a field, the model signal updates. When code updates the model signal, the field updates.
@@ -72,7 +72,7 @@ The model is a plain object:
 
 The form tree mirrors that object:
 
-```ts
+```text
 topicForm.title
 topicForm.description
 ```
@@ -83,7 +83,7 @@ This is different from reactive forms, where the form model is declared separate
 new FormGroup({
   title: new FormControl(''),
   description: new FormControl(''),
-})
+});
 ```
 
 Signal Forms reduces that duplication. The TypeScript shape of the signal model gives the form tree its field names.

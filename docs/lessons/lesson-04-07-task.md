@@ -1,4 +1,4 @@
-# Lesson 04-07 Task: Introduce Experimental Signal Forms
+# Lesson 04-07 Task: Introduce Stable Signal Forms
 
 ## Feature to build
 
@@ -14,10 +14,10 @@ Replace the reactive form bindings with Signal Forms field bindings while keepin
 1. In `dashboard.ts`, remove reactive forms imports:
 
    ```ts
-   FormControl
-   FormGroup
-   ReactiveFormsModule
-   Validators
+   FormControl;
+   FormGroup;
+   ReactiveFormsModule;
+   Validators;
    ```
 
 2. Import `signal` from Angular if it is not already imported:

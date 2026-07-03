@@ -1,6 +1,6 @@
 <section class="dashboard">
-  <h1>Angular 21 Learning Tracker</h1>
-  <p>A tiny app for learning modern Angular 21 one concept at a time.</p>
+  <h1>Angular 22 Learning Tracker</h1>
+  <p>A tiny app for learning modern Angular 22 one concept at a time.</p>
 
   <p class="progress">{{ store.progressLabel() }}</p>
 
@@ -14,10 +14,7 @@
     <p>Keep going.</p>
   }
 
-  <app-topics-list
-    [topics]="store.topics()"
-    (toggle)="store.toggleTopic($event)"
-  />
+  <app-topics-list [topics]="store.topics()" (toggle)="store.toggleTopic($event)" />
 
   <form class="topic-form" [formGroup]="topicForm" (ngSubmit)="addTopic()">
     <label>
@@ -25,10 +22,7 @@
       <input type="text" formControlName="title" />
     </label>
 
-    @if (
-      topicForm.controls.title.touched &&
-      topicForm.controls.title.hasError('required')
-    ) {
+    @if (topicForm.controls.title.touched && topicForm.controls.title.hasError('required')) {
       <p class="error">Title is required.</p>
     }
 

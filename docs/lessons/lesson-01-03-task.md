@@ -28,8 +28,8 @@ A "Mark one complete" button that increments the counter on each click.
 Final `app.html`:
 
 ```html
-<h1>Angular 21 Learning Tracker</h1>
-<p>A tiny app for learning modern Angular 21 one concept at a time.</p>
+<h1>Angular 22 Learning Tracker</h1>
+<p>A tiny app for learning modern Angular 22 one concept at a time.</p>
 <p>Topics completed: {{ completedCount() }}</p>
 <button type="button" (click)="markOneComplete()">Mark one complete</button>
 ```

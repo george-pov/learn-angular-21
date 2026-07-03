@@ -1,7 +1,4 @@
-import {
-  ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
-} from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
@@ -14,7 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
-    { provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' },
+    { provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' },
     { provide: LOGGER_PREFIX, useValue: 'app' },
     {
       provide: Logger,

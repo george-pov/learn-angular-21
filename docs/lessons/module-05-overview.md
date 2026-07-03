@@ -10,7 +10,7 @@ Modules 01-04.
 
 ## Angular v15, React, and Vue framing
 
-Angular v15 commonly showed constructor injection first. Angular 21 code can use `inject()` in fields, which reads closer to React hooks but is still Angular DI, not component-local state.
+Angular v15 commonly showed constructor injection first. Angular 22 code can use `inject()` in fields, which reads closer to React hooks but is still Angular DI, not component-local state.
 
 React has no built-in equivalent to Angular's injector tree. Context is the closest comparison for sharing values through a subtree, but Angular providers can create class instances, replace implementations, and provide configuration values. Vue `provide` / `inject` is also a useful comparison for scoping, but Angular providers are strongly tied to injectors.
 

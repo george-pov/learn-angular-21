@@ -9,8 +9,7 @@ Assert a specific piece of rendered DOM text instead of only checking the whole 
 `fixture.nativeElement` is the root DOM element for the rendered component:
 
 ```ts
-const progress: HTMLElement | null =
-  fixture.nativeElement.querySelector('.progress');
+const progress: HTMLElement | null = fixture.nativeElement.querySelector('.progress');
 
 expect(progress?.textContent).toContain('1 of 1 topics complete');
 ```
@@ -27,13 +26,13 @@ This is a DOM-first assertion. The test asks what the user could see, not which 
 The whole page text is useful for smoke tests:
 
 ```ts
-expect(fixture.nativeElement.textContent).toContain('Angular 21 Learning Tracker');
+expect(fixture.nativeElement.textContent).toContain('Angular 22 Learning Tracker');
 ```
 
 Specific elements make intent clearer:
 
 ```ts
-fixture.nativeElement.querySelector('.progress')
+fixture.nativeElement.querySelector('.progress');
 ```
 
 If that assertion fails, the failure points at the progress UI instead of the entire page.

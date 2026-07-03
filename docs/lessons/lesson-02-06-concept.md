@@ -12,7 +12,9 @@ Signal-based outputs declared with `output<T>()`:
 import { Component, input, output } from '@angular/core';
 import { Topic } from '../topic';
 
-@Component({ /* ... */ })
+@Component({
+  /* ... */
+})
 export class TopicsList {
   readonly topics = input.required<Topic[]>();
   readonly toggle = output<number>();
@@ -28,10 +30,7 @@ export class TopicsList {
 In the parent:
 
 ```html
-<app-topics-list
-  [topics]="topics()"
-  (toggle)="toggleTopic($event)"
-/>
+<app-topics-list [topics]="topics()" (toggle)="toggleTopic($event)" />
 ```
 
 `$event` is the value passed to `.emit(...)`. Here it is the topic id.
@@ -49,7 +48,7 @@ Angular v15:
 @Output() toggle = new EventEmitter<number>();
 ```
 
-Angular v21:
+Angular v22:
 
 ```ts
 readonly toggle = output<number>();

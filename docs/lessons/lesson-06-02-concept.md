@@ -35,4 +35,4 @@ If you skip this step and try to inject `HttpClient`, Angular cannot resolve the
 
 ## Comparison callout
 
-In many Angular v15 apps, you imported `HttpClientModule` in an NgModule. In this Angular 21 standalone app, `provideHttpClient()` replaces that module-level registration.
+In many Angular v15 apps, you imported `HttpClientModule` in an NgModule. In this Angular 22 standalone app, `provideHttpClient()` replaces that module-level registration.

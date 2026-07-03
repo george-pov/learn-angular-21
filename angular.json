@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "learn-angular-21": {
+    "learn-angular-22": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -29,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -61,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "learn-angular-21:build:production"
+              "buildTarget": "learn-angular-22:build:production"
             },
             "development": {
-              "buildTarget": "learn-angular-21:build:development"
+              "buildTarget": "learn-angular-22:build:development"
             }
           },
           "defaultConfiguration": "development"

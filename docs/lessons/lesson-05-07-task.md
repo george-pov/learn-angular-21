@@ -38,7 +38,7 @@ Add a `STORAGE_KEY` injection token, provide it at the root, inject it in `Topic
        provideBrowserGlobalErrorListeners(),
        provideRouter(routes, withComponentInputBinding()),
        { provide: Logger, useClass: ConsoleLogger },
-       { provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' },
+       { provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' },
      ],
    };
    ```
@@ -71,7 +71,7 @@ Add a `STORAGE_KEY` injection token, provide it at the root, inject it in `Topic
 7. Do not replace the string token with a raw string in `inject()`. Always inject the `STORAGE_KEY` token:
 
    ```ts
-   inject(STORAGE_KEY)
+   inject(STORAGE_KEY);
    ```
 
 ## Prediction
@@ -80,13 +80,13 @@ Before running the app, predict what string the dashboard will render for the st
 
 ## Verify
 
-- The dashboard renders `Storage key: learn-angular-21-topics`.
+- The dashboard renders `Storage key: learn-angular-22-topics`.
 - Topic toggling and form submission still work.
 - `STORAGE_KEY` is an `InjectionToken<string>`.
 - `app.config.ts` provides the value with `useValue`.
 - No persistence code has been added yet.
 - Changing the `useValue` string changes the diagnostic text after refresh.
-- `TopicStore` does not hardcode `'learn-angular-21-topics'`.
+- `TopicStore` does not hardcode `'learn-angular-22-topics'`.
 
 ## Reflection
 

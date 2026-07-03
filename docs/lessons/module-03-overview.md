@@ -17,7 +17,7 @@ In Angular v15 you typically had:
 - Lazy loading via `loadChildren: () => import('...').then(m => m.FeatureModule)`.
 - Route parameters read via `ActivatedRoute.params` (an `Observable<Params>`) and `paramMap`.
 
-In Angular v21 the same pieces live in `app.config.ts` as `provideRouter(routes)`. Routes point to standalone components. `loadComponent` lazy-loads a single component without a wrapper module. Route parameters can be bound directly into a component's signal `input()` via `withComponentInputBinding()` — no `ActivatedRoute` subscription needed for the common case.
+In Angular v22 the same pieces live in `app.config.ts` as `provideRouter(routes)`. Routes point to standalone components. `loadComponent` lazy-loads a single component without a wrapper module. Route parameters can be bound directly into a component's signal `input()` via `withComponentInputBinding()` — no `ActivatedRoute` subscription needed for the common case.
 
 ## React comparison
 

@@ -4,7 +4,7 @@
 
 Collect user input with explicit form state, validation, rendering feedback, and submission.
 
-This module starts with the manual signal input pattern from Module 01, then introduces reactive forms, and then extends the final shape with Angular 21 experimental Signal Forms.
+This module starts with the manual signal input pattern from Module 01, then introduces reactive forms, and then extends the final shape with Angular 22 stable Signal Forms.
 
 ## Prior modules
 
@@ -16,7 +16,7 @@ The learner should already understand signals, computed values, event binding, `
 
 Angular v15 apps commonly used reactive forms and template-driven forms. This module deliberately skips template-driven form binding so the learner does not confuse it with signal-first state. Reactive forms are still important because they are stable, common in existing Angular code, and they explain the older forms engine.
 
-Signal Forms are different: the source of truth is a writable signal model, and field state is exposed through signals. In Angular 21 this API is experimental. It is included here because this project targets modern Angular learning and because it connects directly to the signal mental model built in Modules 01-03.
+Signal Forms are different: the source of truth is a writable signal model, and field state is exposed through signals. In Angular 22 this API is stable. It is included here because this project targets modern Angular learning and because it connects directly to the signal mental model built in Modules 01-03.
 
 React learners can compare the manual signal and Signal Forms examples with controlled input state. Vue learners can compare the high-level result with two-way field binding, but the important Angular distinction is the form model that owns validation and rendering state.
 
@@ -56,9 +56,9 @@ The visible UI can look similar, but the state ownership and rendering mechanics
 - 04-04 Show validation feedback after interaction: `touched`, `dirty`, blur events, and `@if`.
 - 04-05 Combine controls into a `FormGroup`: group state and named DOM bindings.
 - 04-06 Submit the reactive form and append a topic: `(ngSubmit)`, snapshots, reset, and signal append.
-- 04-07 Introduce experimental Signal Forms: model signal, `form()`, `FormField`, and field state signals.
+- 04-07 Introduce stable Signal Forms: model signal, `form()`, `FormField`, and field state signals.
 - 04-08 Validate and submit with Signal Forms: schema validation, `FormRoot`, submission lifecycle, and error rendering.
 
 ## End-of-module shape
 
-By the end of Module 04, the dashboard has a topic form backed by Angular 21 experimental Signal Forms. The form uses a signal model, schema-based required validation, field-state-driven error rendering, and a submission action that appends a topic.
+By the end of Module 04, the dashboard has a topic form backed by Angular 22 stable Signal Forms. The form uses a signal model, schema-based required validation, field-state-driven error rendering, and a submission action that appends a topic.

@@ -23,21 +23,18 @@ A new `Dashboard` component that holds the entire tracker UI from Module 02. The
 2. Create `src/app/dashboard/dashboard.html` with the dashboard markup moved from `app.html`:
 
    ```html
-   <h1>Angular 21 Learning Tracker</h1>
-   <p>A tiny app for learning modern Angular 21 one concept at a time.</p>
+   <h1>Angular 22 Learning Tracker</h1>
+   <p>A tiny app for learning modern Angular 22 one concept at a time.</p>
 
    <p>{{ progressLabel() }}</p>
 
    @if (topics().every((topic) => topic.done)) {
-     <p>All topics complete.</p>
+   <p>All topics complete.</p>
    } @else {
-     <p>Keep going.</p>
+   <p>Keep going.</p>
    }
 
-   <app-topics-list
-     [topics]="topics()"
-     (toggle)="toggleTopic($event)"
-   />
+   <app-topics-list [topics]="topics()" (toggle)="toggleTopic($event)" />
 
    <label>
      New topic title:
@@ -95,9 +92,7 @@ A new `Dashboard` component that holds the entire tracker UI from Module 02. The
 
      protected toggleTopic(id: number): void {
        this.topics.update((current) =>
-         current.map((topic) =>
-           topic.id === id ? { ...topic, done: !topic.done } : topic,
-         ),
+         current.map((topic) => (topic.id === id ? { ...topic, done: !topic.done } : topic)),
        );
      }
    }
@@ -130,9 +125,7 @@ A new `Dashboard` component that holds the entire tracker UI from Module 02. The
    import { Routes } from '@angular/router';
    import { Dashboard } from './dashboard/dashboard';
 
-   export const routes: Routes = [
-     { path: '', component: Dashboard },
-   ];
+   export const routes: Routes = [{ path: '', component: Dashboard }];
    ```
 
 ## Prediction

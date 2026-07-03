@@ -1,6 +1,6 @@
-# Angular 21 Teaching Plan
+# Angular 22 Teaching Plan
 
-This plan is for a developer who has used Angular v15, is comfortable with React and Vue.js, and wants to learn how modern Angular applications are built in Angular v21.
+This plan is for a developer who has used Angular v15, is comfortable with React and Vue.js, and wants to learn how modern Angular applications are built in Angular v22.
 
 The plan is organized as topic-level **modules**. Each module contains several **micro-lessons**, and each micro-lesson introduces exactly one new Angular concept on top of code the learner already understands. Every micro-lesson produces a small, runnable, visible change in the app.
 
@@ -19,7 +19,7 @@ The anti-patterns listed alongside those principles must be actively avoided. Th
 
 ## Example app direction
 
-The example app is a small learning-tracker dashboard for Angular 21 concepts. It is intentionally simple, but it gives enough surface area to learn real application development:
+The example app is a small learning-tracker dashboard for Angular 22 concepts. It is intentionally simple, but it gives enough surface area to learn real application development:
 
 - A page that tracks progress through Angular concepts.
 - A way to mark a topic as learned.
@@ -30,7 +30,7 @@ The example app is a small learning-tracker dashboard for Angular 21 concepts. I
 - A real HTTP-backed topic list (via a small local API).
 - Deferrable views, unit tests, and end-to-end tests for the final shape.
 
-The earliest micro-lessons stay inside this domain but work on **primitive signals first** (a "topics completed" counter, a "current topic title" text input). The topic *array*, list rendering, and child components arrive in Module 02. This keeps Lesson 01-01 free of arrays, `@for`, and component composition.
+The earliest micro-lessons stay inside this domain but work on **primitive signals first** (a "topics completed" counter, a "current topic title" text input). The topic _array_, list rendering, and child components arrive in Module 02. This keeps Lesson 01-01 free of arrays, `@for`, and component composition.
 
 ## Starting state
 
@@ -47,17 +47,17 @@ No feature folders, no `Topic` type, no seed topics, no child components. Module
 
 ## Module list
 
-| Module | Title | Topic area |
-| ------ | ----- | ---------- |
-| 01 | Components, Signals, and Templates | The mental model for modern Angular component code. Primitive signals only. |
-| 02 | Lists and Composition | The topic array, `@for`, `track`, child components, signal inputs, outputs. |
-| 03 | Routing | `provideRouter`, `RouterOutlet`, `RouterLink`, route params, `loadComponent`. |
-| 04 | Forms | Manual signal input baseline, reactive `FormControl` and `FormGroup` mechanics, validation rendering, experimental Signal Forms. |
-| 05 | Dependency Injection | `inject()`, root services, signals in services, scoped providers, alternative providers. |
-| 06 | HTTP | `provideHttpClient`, GET, error handling, POST, signal/observable interop, against a local `json-server` API. |
-| 07 | Deferrable Views | `@defer`, triggers, loading and placeholder and error blocks. |
-| 08 | Component and Store Testing | TestBed, fixtures, querying the DOM, event simulation, signal-driven assertions. |
-| 09 | End-to-End Testing | Playwright Test, `webServer`, locators, web-first assertions, user workflows, API boundary control. |
+| Module | Title                              | Topic area                                                                                                                 |
+| ------ | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| 01     | Components, Signals, and Templates | The mental model for modern Angular component code. Primitive signals only.                                                |
+| 02     | Lists and Composition              | The topic array, `@for`, `track`, child components, signal inputs, outputs.                                                |
+| 03     | Routing                            | `provideRouter`, `RouterOutlet`, `RouterLink`, route params, `loadComponent`.                                              |
+| 04     | Forms                              | Manual signal input baseline, reactive `FormControl` and `FormGroup` mechanics, validation rendering, stable Signal Forms. |
+| 05     | Dependency Injection               | `inject()`, root services, signals in services, scoped providers, alternative providers.                                   |
+| 06     | HTTP                               | `provideHttpClient`, GET, error handling, POST, signal/observable interop, against a local `json-server` API.              |
+| 07     | Deferrable Views                   | `@defer`, triggers, loading and placeholder and error blocks.                                                              |
+| 08     | Component and Store Testing        | TestBed, fixtures, querying the DOM, event simulation, signal-driven assertions.                                           |
+| 09     | End-to-End Testing                 | Playwright Test, `webServer`, locators, web-first assertions, user workflows, API boundary control.                        |
 
 A short [docs/build-and-production.md](./build-and-production.md) reference page (to be added with Module 08) covers `npm run build`, what changes in production, and how lazy loading and deferrable views affect bundles. It is reference reading, not a lesson module.
 
@@ -73,7 +73,7 @@ After this module the learner can read and write a standalone component, store r
 
 Micro-lessons:
 
-- **01-01 Read a standalone component.** Concept: what a standalone Angular component is, what `@Component` declares, how `selector`, `templateUrl`, and `styleUrl` connect. Change: rename the placeholder app title to "Angular 21 Learning Tracker" and add one paragraph of intro text in the template. No new TypeScript code.
+- **01-01 Read a standalone component.** Concept: what a standalone Angular component is, what `@Component` declares, how `selector`, `templateUrl`, and `styleUrl` connect. Change: rename the placeholder app title to "Angular 22 Learning Tracker" and add one paragraph of intro text in the template. No new TypeScript code.
 - **01-02 Introduce `signal`.** Concept: signals as the unit of reactive state, the `signal()` factory, reading a signal with `()`. Change: add `private readonly completedCount = signal(0);` to `App` and render `{{ completedCount() }}` in the template. No buttons yet — the value displays as `0`.
 - **01-03 Update a signal from an event.** Concept: template event binding `(click)` and the `signal.set` / `signal.update` writer API. Change: add a "Mark one complete" button that calls a `markOneComplete()` method on the component. The counter visibly increments on click.
 - **01-04 Derive state with `computed`.** Concept: `computed()` for derived values, automatic dependency tracking. Change: add a fixed `totalTopics = signal(4);` and a `progressLabel = computed(() => …)` that renders `"X of Y topics complete"`. The label updates as the counter changes.
@@ -97,7 +97,7 @@ Micro-lessons:
 - **02-01 Introduce a typed model.** Concept: a domain `type` lives in its own file. Change: create `src/app/topic.ts` exporting `type Topic = { id: number; title: string; description: string; done: boolean; }`. No UI change.
 - **02-02 Render a list with `@for` and `track`.** Concept: the `@for` block, the required `track` expression, and why identity matters. Change: replace the `completedCount` counter with `private readonly topics = signal<Topic[]>([…three seed topics…]);` and render the titles inside `@for (topic of topics(); track topic.id) { … }`. Update the progress label to derive from `topics().length` and `topics().filter(t => t.done).length`. **Comparison callout**: `track` versus React's `key` prop. The "Mark one complete" button is removed in this lesson; per-topic toggling lands in 02-03.
 - **02-03 Toggle a list item with immutable update.** Concept: updating an array signal immutably via `.update(prev => prev.map(...))`. Change: add a checkbox next to each topic with `[checked]="topic.done"` and `(change)="toggleTopic(topic.id)"`. `toggleTopic` updates `topics` immutably. Computed progress reflects the change.
-- **02-04 Extract a child component.** Concept: a standalone child component with its own template; importing it via the parent's `imports` array. Change: create `topics-list` component with its own `.ts`/`.html`/`.scss`, hardcoded to render an internal copy of the topic array for now. Import it in `App` and render `<app-topics-list />`. Then *remove* the list rendering from `App.html`. The visible UI is identical, but the markup moved.
+- **02-04 Extract a child component.** Concept: a standalone child component with its own template; importing it via the parent's `imports` array. Change: create `topics-list` component with its own `.ts`/`.html`/`.scss`, hardcoded to render an internal copy of the topic array for now. Import it in `App` and render `<app-topics-list />`. Then _remove_ the list rendering from `App.html`. The visible UI is identical, but the markup moved.
 - **02-05 Pass data with `input()`.** Concept: signal-based component inputs created with `input.required<T>()`. Change: replace the hardcoded array in `TopicsList` with `readonly topics = input.required<Topic[]>();`. In `App`, render `<app-topics-list [topics]="topics()" />`. State ownership returns to `App`.
 - **02-06 Emit events with `output()`.** Concept: signal-based outputs created with `output<T>()` and `.emit()`. Change: add `readonly toggle = output<number>();` to `TopicsList`. The checkbox `(change)` now calls a child method that emits the topic id. `App` binds `(toggle)="toggleTopic($event)"` and owns `toggleTopic` again.
 
@@ -132,7 +132,7 @@ Topic: collect user input with explicit form state, validation feedback, submiss
 
 Prior modules required: Modules 01–03.
 
-After this module the learner can explain the manual signal input loop, build a reactive form from `FormControl` and `FormGroup`, attach validators, render feedback from touched and invalid state, submit a reactive form, and compare that stable forms engine with the experimental Signal Forms API introduced in Angular 21.
+After this module the learner can explain the manual signal input loop, build a reactive form from `FormControl` and `FormGroup`, attach validators, render feedback from touched and invalid state, submit a reactive form, and compare that stable forms engine with the Signal Forms API that is stable in Angular 22.
 
 Micro-lessons:
 
@@ -142,7 +142,7 @@ Micro-lessons:
 - **04-04 Show validation feedback after touch.** Concept: `touched` state, blur handling, and conditional error rendering with `@if`. Change: render "Title is required" only when the field is both touched and failing the required validator. Visible: the message appears after the learner focuses and blurs an empty field.
 - **04-05 Combine controls into a `FormGroup`.** Concept: `FormGroup` for multi-field state; `[formGroup]` and `formControlName` as name-based bindings. Change: introduce `topicForm = new FormGroup({ title: ..., description: ... })`, bind a `<form>` to it, and add a title input plus description textarea.
 - **04-06 Submit the reactive form and append a topic.** Concept: `(ngSubmit)`, value snapshots, invalid-submit guards, and reset. Change: add `(ngSubmit)="addTopic()"`. `addTopic()` checks `topicForm.invalid`, marks controls touched when needed, reads `topicForm.getRawValue()`, appends to the `topics` signal, and resets the form.
-- **04-07 Introduce experimental Signal Forms.** Concept: a writable signal model becomes the source of truth, and `form()` creates a field tree that mirrors that model. Change: replace the reactive form with `topicDraft = signal({ title: '', description: '' })`, `topicForm = form(topicDraft)`, and `[formField]` bindings for the title and description fields.
+- **04-07 Introduce stable Signal Forms.** Concept: a writable signal model becomes the source of truth, and `form()` creates a field tree that mirrors that model. Change: replace the reactive form with `topicDraft = signal({ title: '', description: '' })`, `topicForm = form(topicDraft)`, and `[formField]` bindings for the title and description fields.
 - **04-08 Validate and submit with Signal Forms.** Concept: schema validation, field state signals, `FormRoot`, submission actions, and `submitting()`. Change: add `required(path.title, { message: 'Title is required.' })`, render errors from `topicForm.title().errors()`, bind `[formRoot]="topicForm"`, and move the append/reset work into the Signal Forms submission action.
 
 End-of-module visible state: a working Signal Forms dashboard form that validates the title, renders touched-field feedback, disables duplicate submissions while the action runs, and adds new topics to the list.
@@ -165,7 +165,7 @@ Micro-lessons:
 - **05-04 Add `computed` derived state to the service.** Concept: derived state belongs to the same owner as the source state. Change: move `completedCount` and the progress label computation into `TopicStore`. `Dashboard` reads them from `store`.
 - **05-05 Scope a service at the component level.** Concept: providing a service inside `@Component({ providers: [...] })` creates a fresh instance for that component subtree. Change: introduce a tiny `LoggerService` that logs to the console with a configurable prefix. Provide it at the root with default prefix `"app"`. In `TopicDetails`, add `providers: [LoggerService]` and demonstrate that the local logger is a different instance. Log calls from `Dashboard` and `TopicDetails` show different prefixes after 05-06 wires that.
 - **05-06 Replace an implementation with `useClass`.** Concept: provider tokens versus implementations; replacing one for another in a child injector. Change: define an abstract `Logger` token. Provide `ConsoleLogger` at the root with `useClass: ConsoleLogger`. In `TopicDetails`, override with `{ provide: Logger, useClass: VerboseLogger }` so the details page logs include the topic id. Demonstrates polymorphic DI.
-- **05-07 Provide a plain value with `useValue`.** Concept: injection tokens and `useValue` for configuration values. Change: define `export const STORAGE_KEY = new InjectionToken<string>('STORAGE_KEY');`. Provide it at the root with `{ provide: STORAGE_KEY, useValue: 'learn-angular-21-topics' }`. Inject the token in `TopicStore` and use it in place of a hardcoded string. No visible UI change.
+- **05-07 Provide a plain value with `useValue`.** Concept: injection tokens and `useValue` for configuration values. Change: define `export const STORAGE_KEY = new InjectionToken<string>('STORAGE_KEY');`. Provide it at the root with `{ provide: STORAGE_KEY, useValue: 'learn-angular-22-topics' }`. Inject the token in `TopicStore` and use it in place of a hardcoded string. No visible UI change.
 - **05-08 Build a value with `useFactory`.** Concept: `useFactory` for values that depend on other injectables. Change: provide a `{ provide: APP_BUILD_LABEL, useFactory: () => `built-at-${new Date().toISOString()}` }` token (or similar). Inject it in `App` and render it once in the footer. Demonstrates that providers can be computed.
 - **05-09 Persist state with `effect`.** Concept: `effect()` as the bridge between a signal and an external side effect, including `localStorage`. Change: inside `TopicStore`, add an `effect(() => localStorage.setItem(this.storageKey, JSON.stringify(this.topicsSignal())));` and a `loadTopics()` that seeds from `localStorage`. Refreshing the page keeps custom topics and toggled state.
 

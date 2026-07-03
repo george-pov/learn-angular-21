@@ -12,7 +12,7 @@ Module 01.
 
 In Angular v15, lists used `*ngFor` (a structural directive), child components received data through `@Input()` decorators, and they emitted events through `@Output()` with `EventEmitter`. Data flowed through plain class properties; reactivity came from `Zone.js` watching every async event.
 
-In Angular v21, the list block is `@for` with a required `track`. Component inputs are signals created by the `input()` and `input.required()` functions, not decorators. Outputs come from `output<T>()`, which emits values without exposing the full `EventEmitter` surface.
+In Angular v22, the list block is `@for` with a required `track`. Component inputs are signals created by the `input()` and `input.required()` functions, not decorators. Outputs come from `output<T>()`, which emits values without exposing the full `EventEmitter` surface.
 
 ## React comparison
 

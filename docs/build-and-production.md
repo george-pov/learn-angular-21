@@ -1,6 +1,6 @@
 # Build And Production Reference
 
-This page is reference reading for the Angular 21 learning tracker. It is not a micro-lesson because it does not add a new visible app slice.
+This page is reference reading for the Angular 22 learning tracker. It is not a micro-lesson because it does not add a new visible app slice.
 
 ## Build command
 

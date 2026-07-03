@@ -43,7 +43,7 @@ field value changes -> validation rules run -> field state signals update -> tem
 
 The field exposes status as signals:
 
-```html
+```text
 topicForm.title().invalid()
 topicForm.title().errors()
 topicForm.title().touched()
@@ -51,7 +51,7 @@ topicForm.title().touched()
 
 The template can render errors from field state:
 
-```html
+```angular-html
 @if (topicForm.title().touched() && topicForm.title().invalid()) {
   @for (error of topicForm.title().errors(); track error.kind) {
     <p class="error">{{ error.message || 'Title is required.' }}</p>
@@ -104,7 +104,7 @@ The field decides which errors exist. The template decides how to display them.
 
 `FormRoot` binds a Signal Form to a native `<form>` element:
 
-```html
+```angular-html
 <form [formRoot]="topicForm">
   ...
 </form>
@@ -136,7 +136,7 @@ If validation fails, the action does not run. Signal Forms marks interactive fie
 The submit action is no longer a separate `(ngSubmit)` handler in the template. It is part of the form definition:
 
 ```ts
-form(model, schema, { submission: { action } })
+form(model, schema, { submission: { action } });
 ```
 
 That puts validation gating and submission state in the same forms system.
@@ -189,9 +189,9 @@ touched-based display policy
 
 The form can be invalid without shouting at the user on a fresh empty form.
 
-## Experimental API note
+## Stable API note
 
-The installed Angular 21 package marks Signal Forms APIs as experimental. That means the API is valid for learning modern Angular, but it should be taught as a forward-looking API, not as a guaranteed stable production contract for Angular 21.
+The installed Angular 22 package marks Signal Forms APIs as stable. That means the lesson can teach them as current Angular, while reactive forms remain useful for understanding existing Angular applications.
 
 ## Comparison callout
 

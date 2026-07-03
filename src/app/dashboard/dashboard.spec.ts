@@ -42,9 +42,7 @@ describe('Dashboard', () => {
   });
 
   it('renders the learning tracker title', () => {
-    expect(fixture.nativeElement.textContent).toContain(
-      'Angular 21 Learning Tracker',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Angular 22 Learning Tracker');
   });
 
   it('renders the initial progress label', () => {
@@ -52,17 +50,17 @@ describe('Dashboard', () => {
   });
 
   it('adds a topic from the form when the API is unavailable', () => {
-    const title: HTMLInputElement =
-      fixture.nativeElement.querySelector('input[formControlName="title"]');
+    const title: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[formControlName="title"]',
+    );
     const form: HTMLFormElement = fixture.nativeElement.querySelector('form');
 
     title.value = 'Testing';
     title.dispatchEvent(new Event('input'));
     form.dispatchEvent(new Event('submit'));
-    http.expectOne('http://localhost:3000/topics').flush(
-      {},
-      { status: 500, statusText: 'Test error' },
-    );
+    http
+      .expectOne('http://localhost:3000/topics')
+      .flush({}, { status: 500, statusText: 'Test error' });
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Testing');

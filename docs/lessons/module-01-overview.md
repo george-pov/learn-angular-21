@@ -6,7 +6,7 @@ The mental model for modern Angular component code, using only primitive reactiv
 
 ## Prior modules required
 
-None. Module 01 starts from the minimal Angular shell described in [docs/angular-21-teaching-plan.md](../angular-21-teaching-plan.md#starting-state).
+None. Module 01 starts from the minimal Angular shell described in [docs/angular-22-teaching-plan.md](../angular-22-teaching-plan.md#starting-state).
 
 ## Angular v15 comparison
 
@@ -16,11 +16,11 @@ In Angular v15 a component looked similar on the outside, but several things wer
 - Local component state was a plain class field, often updated by direct mutation. Change detection was driven by `Zone.js` watching every async event.
 - Template control flow used structural directives: `*ngIf`, `*ngFor`, `*ngSwitch`. They were modules you had to import (`CommonModule`).
 
-In Angular v21 the same component is a **standalone** class declared with `@Component`, owns reactive state through **signals**, and uses **template control flow** like `@if` and `@for` that is built into the template language. Imports are local to the component, not the module.
+In Angular v22 the same component is a **standalone** class declared with `@Component`, owns reactive state through **signals**, and uses **template control flow** like `@if` and `@for` that is built into the template language. Imports are local to the component, not the module.
 
 ## React comparison
 
-`signal<T>()` plays a similar role to React's `useState`. The difference: in Angular you *call* the signal to read its value (`completedCount()`), and you call `.set` or `.update` to write it. Components are still classes, not functions, but the mental model of "store some state, derive other state from it, render based on it" is the same.
+`signal<T>()` plays a similar role to React's `useState`. The difference: in Angular you _call_ the signal to read its value (`completedCount()`), and you call `.set` or `.update` to write it. Components are still classes, not functions, but the mental model of "store some state, derive other state from it, render based on it" is the same.
 
 `computed()` is similar to `useMemo`, except dependencies are tracked automatically — there is no dependency array. `@if` and `@for` are the template equivalent of `{condition && <X />}` and `array.map(...)`.
 

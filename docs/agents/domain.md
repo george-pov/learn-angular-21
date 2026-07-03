@@ -6,7 +6,7 @@ when exploring the codebase.
 ## Before exploring, read these
 
 - `README.md` at the repo root
-- `docs/angular-21-teaching-plan.md`
+- `docs/angular-22-teaching-plan.md`
 - The relevant files under `docs/lessons/`
 - `.work/adr/` for local decisions that touch the area being changed
 
@@ -21,7 +21,7 @@ Single-context learning repo:
 /
 ├── README.md
 ├── docs/
-│   ├── angular-21-teaching-plan.md
+│   ├── angular-22-teaching-plan.md
 │   ├── agents/
 │   └── lessons/
 ├── .work/

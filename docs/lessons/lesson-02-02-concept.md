@@ -10,7 +10,7 @@ Replace the manual counter with a real list of three topics rendered with `@for`
 
 ```html
 @for (topic of topics(); track topic.id) {
-  <li>{{ topic.title }}</li>
+<li>{{ topic.title }}</li>
 }
 ```
 
@@ -31,10 +31,12 @@ Why `track` is required: when the array changes (a topic toggled, a topic added)
 `track` is the Angular equivalent of React's `key` prop:
 
 ```jsx
-{topics.map(topic => <li key={topic.id}>{topic.title}</li>)}
+{
+  topics.map((topic) => <li key={topic.id}>{topic.title}</li>);
+}
 ```
 
-Both serve the same job: a stable identity for each row so the framework can do minimal DOM work. In Angular v15 you would have written `*ngFor="let topic of topics; trackBy: trackById"` and added a method on the class. The `track` expression in v21 replaces the indirection.
+Both serve the same job: a stable identity for each row so the framework can do minimal DOM work. In Angular v15 you would have written `*ngFor="let topic of topics; trackBy: trackById"` and added a method on the class. The `track` expression in v22 replaces the indirection.
 
 ## Why remove the button?
 
